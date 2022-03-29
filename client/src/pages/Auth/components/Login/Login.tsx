@@ -18,7 +18,6 @@ import { Loading } from '../Loading/Loading';
 import { GetLogin } from '../../../../api/getAuth';
 
 export const Login = () => {
-  const { token, setToken } = useToken();
   // prettier-ignore
   const [username, setUsername, isUsernameValid] = useStateValidation<string>((v: string) => v.length > 5,'');
   // prettier-ignore
