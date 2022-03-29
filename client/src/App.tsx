@@ -12,6 +12,7 @@ import { MainLayout } from './layouts/MainLayout/MainLayout';
 import { NoPage } from './pages/NoPage/NoPage';
 import { Feed } from './pages/Feed/Feed';
 import { Profile } from './pages/Profile/Profile';
+import { LoginModal, SignUpModal } from './pages/Auth/Auth';
 
 const App = () => {
   const { isOnline } = useNetworkStatus();
@@ -20,9 +21,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="signup" element={<SignUpModal />} />
+        <Route path="login" element={<LoginModal />} />
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Feed />} />
-          <Route path="Profile" element={<Profile />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

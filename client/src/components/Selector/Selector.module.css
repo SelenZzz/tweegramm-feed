@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 55px;
+  border: 1px solid #cfd9de;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.container:focus-within {
+  border-color: transparent;
+  outline: 2px solid #1d9bf0;
+}
+
+.container > select {
+  appearance: none;
+
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 5px 5px;
+
+  font-size: 17px;
+
+  outline: 0;
+  border: 0;
+  background-color: #ffffff;
+
+  align-self: flex-end;
+}
+
+.container > select {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='grey'><polygon points='0,0 100,0 50,50'/></svg>")
+    no-repeat;
+  background-size: 12px;
+  background-position: calc(100% - 10px) calc(50% - 3px);
+  background-repeat: no-repeat;
+}
+
+.selectPlaceholder {
+  color: grey;
+  font-size: 12px;
+  height: 24px;
+  transition: all 100ms ease;
+  margin-left: -100%;
+  padding: 5px 10px;
+}
+
+.month {
+  flex-grow: 2;
+}
+
+.day {
+  flex-grow: 1;
+}
+
+.year {
+  flex-grow: 1;
+}

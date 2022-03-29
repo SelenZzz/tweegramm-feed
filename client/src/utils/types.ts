@@ -11,3 +11,10 @@ export interface iUser {
   uuid: string;
   username: string;
 }
+
+export interface newUser {
+  username: string;
+  email: string;
+  birthday: number;
+  password: string;
+}

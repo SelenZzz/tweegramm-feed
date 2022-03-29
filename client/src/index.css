@@ -1,8 +1,22 @@
+:root {
+  --lighter-overlay: #00000005;
+  --light-overlay: #00000010;
+  --dark-overlay: #00000066;
+  --darker-overlay: #00000066;
+
+  --lighter: #f1f3f4;
+  --light: #cfd9de;
+  --blue: #1d9bf0;
+  --white: #ffffff;
+  --red: #cc1111;
+  --grey: #74767a;
+  --black: #1b1c1e;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

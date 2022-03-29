@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.container:hover {
+  background-color: var(--lighter-overlay);
+}
+
+.container:active {
+  background-color: var(--light-overlay);
+}
