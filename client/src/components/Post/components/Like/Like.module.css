@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  width: 70px;
+}
+
+.button {
+  padding: 10px;
+}
+
+.i {
+  cursor: pointer;
+  padding-right: 8px;
+  display: inline-block;
+  color: #aaa;
+  transition: 0.2s;
+}
+
+.i:hover {
+  color: #666;
+}
+
+.i:active {
+  animation: size 0.4s;
+  color: #9b2727;
+}
+
+.active {
+  animation: size 0.4s;
+  color: #e23b3b;
+}
+
+.active:hover {
+  animation: size 0.4s;
+  color: #c13434;
+}
+
+.active:active {
+  animation: size 0.4s;
+  color: #9b2727;
+}
+
+.counter {
+  color: rgb(140, 140, 140);
+  font-size: 14px;
+}

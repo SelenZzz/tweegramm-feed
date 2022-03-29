@@ -1,9 +1,9 @@
 export interface iPost {
   uuid: string;
-  username: string;
-  createdAt: number;
+  username?: string;
+  createdAt?: number;
   text: string;
-  likes: number;
+  likes?: number;
   media?: string;
 }
 

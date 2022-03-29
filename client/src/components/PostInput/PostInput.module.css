@@ -1,0 +1,89 @@
+.post {
+  padding: 10px 7px 5px 10px;
+  display: flex;
+  flex-flow: row;
+  border-bottom: 1px solid var(--lighter);
+}
+
+.form {
+  word-break: break-word;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.textContainer {
+  display: flex;
+  max-width: 500px;
+  width: 100%;
+  overflow: auto;
+  border: 0px;
+  background-color: transparent;
+  border-bottom: 1px solid var(--lighter);
+  padding-bottom: 10px;
+  padding-top: 5px;
+  font-size: 18px;
+  overflow-wrap: break-word as break-word;
+  overflow: hidden;
+}
+
+.textarea__placeholder {
+  padding-top: 3px;
+  width: 100%;
+  margin-left: -100%;
+  outline: 0px;
+  font-weight: 500;
+  color: grey;
+  transition: all 100ms ease;
+}
+
+.textarea {
+  background-color: transparent;
+  width: 100%;
+  font-weight: 500;
+  outline: 0px;
+  z-index: 2;
+  resize: none;
+  overflow: hidden;
+  border: 0;
+  font-size: 18px;
+  font-family: inherit;
+}
+
+.textarea:focus + .textarea__placeholder {
+  color: lightgrey;
+  transition: all 100ms ease;
+}
+
+.buttonContainer {
+  margin: 12px 12px 6px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.button {
+  font-weight: 700;
+  color: var(--white);
+  font-size: 15px;
+  padding: 7px 21px;
+  border-radius: 15px;
+  border: 0px;
+  transition: all 500ms ease;
+}
+
+.buttonActive {
+  background: var(--blue);
+}
+
+.buttonDisabled {
+  background: #9ccbf4;
+}
+
+.buttonActive:hover {
+  background: #428ad2;
+  transition: all 500ms ease;
+}
+.buttonActive:active {
+  background: #3a7abb;
+  transition: all 200ms ease;
+}

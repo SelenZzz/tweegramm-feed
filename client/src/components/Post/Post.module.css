@@ -1,0 +1,38 @@
+.post {
+  padding: 10px 7px 5px 10px;
+  display: flex;
+  flex-flow: row;
+  border-bottom: 1px solid var(--lighter);
+}
+
+.form {
+  word-break: break-word;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.date {
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+}
+
+.username {
+  font-weight: 700;
+}
+
+.text {
+  white-space: break-spaces;
+  margin: 10px 0px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
