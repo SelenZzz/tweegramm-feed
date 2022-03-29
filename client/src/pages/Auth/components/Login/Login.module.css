@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  color: var(--black);
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 28px;
+}

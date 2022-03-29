@@ -8,16 +8,16 @@ import { useStateValidation } from '../../../../hooks/useStateValidation';
 import { useTimeout } from '../../../../hooks/useTimeout';
 
 // api
-import { GetSignUp } from '../../../../api/GetSignUp';
+import { GetSignUp } from '../../../../api/getAuth';
 
 // utils
-import { newUser } from '../../../../utils/types';
+import { iUser } from '../../../../utils/types';
 
 // components
 import { BigButton } from '../../../../components/BigButton/BigButton';
 import { Info } from './components/Info/Info';
 import { Password } from './components/Password/Password';
-import { Loading } from './components/Loading/Loading';
+import { Loading } from '../Loading/Loading';
 
 export const SignUp = () => {
   // prettier-ignore
@@ -36,7 +36,7 @@ export const SignUp = () => {
   const [password2, setPassword2, isPassword2Valid] = useStateValidation<string>((v: string) => v.length >= 10 && v === password1,'');
 
   const [step, setStep] = useState<number>(0);
-
+  // prettier-ignore
   const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 3000);
   const [error, setError] = useState<boolean>(false);
 
@@ -44,7 +44,6 @@ export const SignUp = () => {
   // prettier-ignore
   const headers = ['Create your account', 'Setup a password', 'Almost done...','Something went wrong'];
   const buttonLabels = ['Next', 'Finish', 'Wait a little bit', ':c'];
-
   const isStepDone = [
     isUsernameValid && isEmailValid && isDayValid && isMonthValid && isYearValid,
     isPassword1Valid && isPassword2Valid,
@@ -53,7 +52,7 @@ export const SignUp = () => {
 
   useEffect(() => {
     if (step === 2) {
-      const userInfo: newUser = {
+      const userInfo: iUser = {
         username: username,
         email: email,
         birthday: Math.floor(new Date(year, month, day).getTime() / 1000),

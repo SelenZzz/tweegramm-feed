@@ -8,13 +8,9 @@ export interface iPost {
 }
 
 export interface iUser {
-  uuid: string;
+  uuid?: string;
   username: string;
-}
-
-export interface newUser {
-  username: string;
-  email: string;
-  birthday: number;
   password: string;
+  email?: string;
+  birthday?: number;
 }
