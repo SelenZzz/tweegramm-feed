@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 
 /// hooks
 import { useStateValidation } from '../../../../hooks/useStateValidation';
-import { useToken } from '../../../../hooks/useToken';
 import { useTimeout } from '../../../../hooks/useTimeout';
 
 // utils
