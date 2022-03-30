@@ -1,5 +1,5 @@
 .next {
-  color: white;
+  color: var(--white);
   background-color: var(--grey);
   font-size: 16px;
   font-weight: 700;
@@ -15,9 +15,9 @@
 }
 
 .nextActive:hover {
-  background-color: #1d2124;
+  background-color: var(--black-hover);
 }
 
 .nextActive:active {
-  background-color: #303437;
+  background-color: var(--black-active);
 }

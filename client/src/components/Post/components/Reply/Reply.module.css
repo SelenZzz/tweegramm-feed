@@ -1,10 +1,10 @@
 .i {
   cursor: pointer;
   display: inline-block;
-  color: #aaa;
+  color: var(--grey);
   transition: 0.2s;
 }
 
 .i:hover {
-  color: #666;
+  color: var(--grey-hover);
 }

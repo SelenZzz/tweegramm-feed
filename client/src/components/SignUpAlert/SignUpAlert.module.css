@@ -42,11 +42,11 @@
 }
 
 .login:hover {
-  background-color: #24242410;
+  background-color: var(--lighter-overlay);
 }
 
 .login:active {
-  background-color: #72727272;
+  background-color: var(--light-overlay);
 }
 
 .login {
@@ -57,11 +57,11 @@
 }
 
 .signup:hover {
-  background-color: #242424;
+  background-color: var(--black-hover);
 }
 
 .signup:active {
-  background-color: #393939;
+  background-color: var(--black-active);
 }
 
 .signup {

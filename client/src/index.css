@@ -4,13 +4,27 @@
   --dark-overlay: #00000066;
   --darker-overlay: #00000066;
 
+  --blue-disabled: #9ccbf4;
+  --blue: #1d9bf0;
+  --blue-hover: #428ad2;
+  --blue-active: #3a7abb;
+
+  --red: #cc1111;
+  --red-hover: #c13434;
+  --red-active: #9b2727;
+
+  --white: #ffffff;
+  --white-transparent: #fffffff5;
+
   --lighter: #f1f3f4;
   --light: #cfd9de;
-  --blue: #1d9bf0;
-  --white: #ffffff;
-  --red: #cc1111;
-  --grey: #74767a;
+
+  --grey: #aaaaaa;
+  --grey-hover: #666666;
+
   --black: #1b1c1e;
+  --black-hover: #1d2124;
+  --black-active: #303437;
 }
 
 body {

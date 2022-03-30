@@ -14,35 +14,35 @@
   cursor: pointer;
   padding-right: 8px;
   display: inline-block;
-  color: #aaa;
+  color: var(--grey);
   transition: 0.2s;
 }
 
 .i:hover {
-  color: #666;
+  color: var(--grey-hover);
 }
 
 .i:active {
   animation: size 0.4s;
-  color: #9b2727;
+  color: var(--red-active);
 }
 
 .active {
   animation: size 0.4s;
-  color: #e23b3b;
+  color: var(--red);
 }
 
 .active:hover {
   animation: size 0.4s;
-  color: #c13434;
+  color: var(--red-hover);
 }
 
 .active:active {
   animation: size 0.4s;
-  color: #9b2727;
+  color: var(--red-active);
 }
 
 .counter {
-  color: rgb(140, 140, 140);
+  color: var(--grey);
   font-size: 14px;
 }

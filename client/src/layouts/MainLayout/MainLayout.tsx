@@ -2,9 +2,6 @@ import styles from './MainLayout.module.css';
 
 import { useState } from 'react';
 
-// import { Navbar } from '../../components/Navbar/Navbar';
-// import { Tags } from '../../components/Tagbar/TagBar';
-
 import { Outlet } from 'react-router-dom';
 
 import { SignUpAlert } from '../../components/SignUpAlert/SignUpAlert';
@@ -16,6 +13,8 @@ import { useLocation } from 'react-router-dom';
 
 // components
 import { LoginModal, SignUpModal } from '../../pages/Auth/Auth';
+import { Navbar } from './components/Navbar/Navbar';
+import { Tags } from './components/Tagbar/TagBar';
 
 export const MainLayout = () => {
   const logged = useSelector(selectLogged);
@@ -51,14 +50,14 @@ export const MainLayout = () => {
         />
       )}
       <div className={styles.container}>
-        {/* <Navbar /> */}
+        <Navbar />
         <div className={styles.outlet}>
           <div className={styles.header}>
             <div className={styles.title}>{title()}</div>
           </div>
           <Outlet />
         </div>
-        {/* <Tags /> */}
+        <Tags />
       </div>
       <footer>
         <p>:)</p>

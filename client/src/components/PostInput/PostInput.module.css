@@ -32,7 +32,7 @@
   margin-left: -100%;
   outline: 0px;
   font-weight: 500;
-  color: grey;
+  color: var(--grey);
   transition: all 100ms ease;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .textarea:focus + .textarea__placeholder {
-  color: lightgrey;
+  color: var(--light);
   transition: all 100ms ease;
 }
 
@@ -76,14 +76,14 @@
 }
 
 .buttonDisabled {
-  background: #9ccbf4;
+  background: var(--blue-disabled);
 }
 
 .buttonActive:hover {
-  background: #428ad2;
+  background: var(--blue-hover);
   transition: all 500ms ease;
 }
 .buttonActive:active {
-  background: #3a7abb;
+  background: var(--blue-active);
   transition: all 200ms ease;
 }
