@@ -20,7 +20,7 @@ import { selectLogged } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
 
 export const Feed = () => {
-  const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 3000);
+  const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 1000);
   const [error, setError] = useState<boolean>(false);
 
   const logged = useSelector(selectLogged);
@@ -30,7 +30,6 @@ export const Feed = () => {
   useEffect(() => {
     clearTimer();
     startTimer();
-    getFeed();
   }, []);
 
   return (

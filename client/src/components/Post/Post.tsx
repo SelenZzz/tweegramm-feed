@@ -8,7 +8,7 @@ import { iPost } from '../../utils/types';
 import { toLocalTime } from '../../utils/toLocalTime';
 
 export const Post = ({ data }: { data: iPost }) => {
-  const { username, createdAt, text, likes, uuid } = data;
+  const { username, createdAt, text, likes, uuid, liked } = data;
 
   return (
     <div className={styles.post}>
@@ -21,7 +21,7 @@ export const Post = ({ data }: { data: iPost }) => {
         <div className={styles.text}>{text}</div>
         <div className={styles.buttonContainer}>
           <Reply />
-          <Like count={likes || 0} uuid={uuid} />
+          <Like count={likes || 0} uuid={uuid} liked={liked || false} />
         </div>
       </form>
     </div>

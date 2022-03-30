@@ -5,18 +5,22 @@ import React, { useState } from 'react';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-import { url } from '../../../../utils/config';
+import { PostLike } from '../../../../api/postLike';
 
-export const Like = ({ count, uuid }: { count: number; uuid: string }) => {
-  const [active, setActive] = useState<Boolean>(false);
+// prettier-ignore
+export const Like = ({ count, uuid, liked }: { count: number; uuid: string, liked: boolean }) => {
+  const { postLike } = PostLike();
+
+  const [active, setActive] = useState<boolean>(liked);
   const [likes, setLikes] = useState<number>(count);
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setLikes(+likes + (!active ? +1 : -1));
-    fetch(`${url}/like.php?u=${uuid}&v=${!active ? +1 : -1}`).then(() => {});
-    console.log(`${url}/like.php?u=${uuid}&v=${!active ? +1 : -1}`);
-    setActive(!active);
+    const response = await postLike(uuid);
+    if (response) {
+      setLikes(likes + (!active ? +1 : -1));
+      setActive(!active);
+    }
   };
 
   return (

@@ -5,6 +5,7 @@ export interface iPost {
   text: string;
   likes?: number;
   media?: string;
+  liked?: boolean;
 }
 
 export interface iUser {
