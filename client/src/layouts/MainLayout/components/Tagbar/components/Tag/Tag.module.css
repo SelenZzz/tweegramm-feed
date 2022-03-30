@@ -1,0 +1,12 @@
+.container {
+  padding: 15px;
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: var(--lighter-overlay);
+}
+
+.tag {
+  font-weight: 700;
+}

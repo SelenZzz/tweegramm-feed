@@ -1,0 +1,37 @@
+.container {
+  box-sizing: border-box;
+
+  background-color: var(--lighter);
+  height: 100%;
+  width: 210px;
+
+  margin: 10px;
+  margin-left: 25px;
+  border-radius: 10px;
+
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: -30%;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    display: none;
+  }
+}
+
+.title {
+  margin: 15px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.href {
+  margin: 15px;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.href:hover {
+  color: var(--blue-hover);
+}

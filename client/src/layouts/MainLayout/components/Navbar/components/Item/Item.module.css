@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  gap: 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .container {
+    padding: 4px 20px;
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px 7px;
+  }
+}
+
+.hoverable:hover {
+  background-color: var(--lighter);
+}
+
+.label {
+  display: block;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  width: 24px;
+}
+
+@media (max-width: 1100px) {
+  .label {
+    display: none;
+  }
+}
