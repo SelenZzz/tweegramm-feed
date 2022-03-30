@@ -1,3 +1,9 @@
+import { NothingFound } from '../../components/NothingFound/NothingFound';
+
 export const NoPage = () => {
-  return <div>Nothing found</div>;
+  return (
+    <div>
+      <NothingFound />
+    </div>
+  );
 };
