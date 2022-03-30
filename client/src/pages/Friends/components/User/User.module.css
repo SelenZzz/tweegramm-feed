@@ -1,0 +1,56 @@
+.container {
+  box-sizing: border-box;
+  padding: 10px 10px;
+  border-bottom: 1px solid #f1f3f4;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 20px;
+
+  transition: 500ms;
+
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: #f1f3f4;
+  transition: 500ms;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.info > div:first-child {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.info > div:last-child {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.menu {
+  position: relative;
+
+  background-color: transparent;
+  border: 1px solid white;
+  transition: 500ms;
+}
+
+.menu > button {
+  padding: 5px 10px;
+  width: 100%;
+  font-size: 16px;
+  border: 0;
+  background-color: white;
+}
+
+.menu > button:hover {
+  background-color: #f1f3f4;
+}

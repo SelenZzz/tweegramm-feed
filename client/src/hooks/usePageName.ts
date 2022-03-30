@@ -15,8 +15,10 @@ export const usePageName = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const pathname = pageNames.get(location.pathname.toLocaleLowerCase());
-    const pagename = typeof pathname === 'undefined' ? 'Not Found' : pathname;
+    const path = location.pathname.split('/');
+    let pagename = 'Not found';
+    if (path[1].toLowerCase() === 'friends' && path[2]) pagename = path[2];
+    else pagename = pageNames.get(location.pathname.toLowerCase())!;
     setName(pagename);
   });
 

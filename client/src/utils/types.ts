@@ -14,4 +14,5 @@ export interface iUser {
   password: string;
   email?: string;
   birthday?: number;
+  info?: string;
 }

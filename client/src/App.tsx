@@ -19,6 +19,7 @@ import { NoPage } from './pages/NoPage/NoPage';
 import { Feed } from './pages/Feed/Feed';
 import { Profile } from './pages/Profile/Profile';
 import { LoginModal, SignUpModal } from './pages/Auth/Auth';
+import { Friends } from './pages/Friends/Friends';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,11 +38,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="signup" element={<SignUpModal />} />
-        <Route path="login" element={<LoginModal />} />
+        <Route path="Signup" element={<SignUpModal />} />
+        <Route path="Login" element={<LoginModal />} />
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Feed />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="Friends" element={<Friends />} />
+          <Route path="Friends/*" element={<Profile />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
