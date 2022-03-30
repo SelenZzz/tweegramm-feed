@@ -64,9 +64,15 @@ export const Navbar = () => {
             iconOutlined={<AccountBoxOutlinedIcon />}
           />
         )}
+
+        {logged && (
+          <div className={styles.accountLine}>
+            <Account />
+          </div>
+        )}
       </div>
       {logged && (
-        <div className={styles.account}>
+        <div className={styles.accountBottom}>
           <Account />
         </div>
       )}

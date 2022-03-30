@@ -20,13 +20,18 @@
   font-size: 20px;
 }
 
-@media (max-width: 600px) {
-  .logo {
-    display: none;
-  }
+.accountLine {
+  display: none;
+}
+
+.accountBottom {
+  display: inline;
 }
 
 @media (max-width: 850px) {
+  .logo {
+    display: none;
+  }
   .container {
     height: 100%;
     margin: 0px;
@@ -35,5 +40,11 @@
   }
   .nav {
     flex-direction: row;
+  }
+  .accountLine {
+    display: inline;
+  }
+  .accountBottom {
+    display: none;
   }
 }
