@@ -7,10 +7,10 @@
   margin-bottom: 10px;
   padding: 10px 20px;
   border-radius: 20px;
-  cursor: pointer;
 }
 
 .info {
+  cursor: pointer;
   font-weight: bold;
   font-size: 16px;
 
@@ -24,4 +24,14 @@
 .container:hover {
   border-radius: 35px;
   background-color: var(--lighter);
+}
+
+@media (max-width: 1100px) {
+  .info {
+    display: none;
+  }
+}
+
+.logout {
+  cursor: pointer;
 }

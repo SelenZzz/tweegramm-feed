@@ -9,12 +9,11 @@ import { SignUpAlert } from '../../components/SignUpAlert/SignUpAlert';
 import { selectLogged } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
 
-import { useLocation } from 'react-router-dom';
-
 // components
 import { LoginModal, SignUpModal } from '../../pages/Auth/Auth';
 import { Navbar } from './components/Navbar/Navbar';
 import { Tags } from './components/Tagbar/TagBar';
+import { usePageName } from '../../hooks/usePageName';
 
 export const MainLayout = () => {
   const logged = useSelector(selectLogged);
@@ -22,22 +21,7 @@ export const MainLayout = () => {
   const [showSignUpModal, setSignUpModal] = useState(false);
   const [showLoginModal, setLoginModal] = useState(false);
 
-  const location = useLocation();
-  const title = () => {
-    switch (location.pathname) {
-      case '/':
-        return 'Feed';
-
-      case '/Profile':
-        return 'Profile';
-
-      case '/Friends':
-        return 'Friends';
-
-      default:
-        return 'Not found';
-    }
-  };
+  const { pageName } = usePageName();
 
   return (
     <>
@@ -53,7 +37,7 @@ export const MainLayout = () => {
         <Navbar />
         <div className={styles.outlet}>
           <div className={styles.header}>
-            <div className={styles.title}>{title()}</div>
+            <div className={styles.title}>{pageName}</div>
           </div>
           <Outlet />
         </div>

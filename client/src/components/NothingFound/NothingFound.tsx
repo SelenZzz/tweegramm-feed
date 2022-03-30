@@ -1,7 +1,5 @@
 import styles from './NothingFound.module.css';
 
-import React from 'react';
-
 export const NothingFound = () => {
   const str = "Sorry, but it's empty here :c".split(/(\s+)/);
   let i = 0;

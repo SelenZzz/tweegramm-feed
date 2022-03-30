@@ -1,5 +1,8 @@
 import styles from './Account.module.css';
 
+// react
+import { useNavigate } from 'react-router-dom';
+
 // components
 import { Avatar } from '../../../../../../components/Avatar/Avatar';
 
@@ -18,13 +21,21 @@ export const Account = () => {
 
   const { postLogout } = PostLogout();
 
+  const navigate = useNavigate();
+
+  const handleInfoClick = () => {
+    navigate('/Profile');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <Avatar />
-        <div>{username}</div>
+        <div onClick={handleInfoClick}>
+          <Avatar />
+        </div>
+        <div onClick={handleInfoClick}>{username}</div>
       </div>
-      <div onClick={postLogout}>
+      <div className={styles.logout} onClick={postLogout}>
         <LogoutIcon />
       </div>
     </div>

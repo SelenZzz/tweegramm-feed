@@ -37,9 +37,3 @@
     flex-direction: row;
   }
 }
-
-@media (max-width: 1100px) {
-  .account {
-    display: none;
-  }
-}
