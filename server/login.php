@@ -8,7 +8,7 @@ $conn    = require 'utils/connection.php';
 $configs = require 'utils/config.php';
 
 $username = $_GET['u'];
-$password = md5($_GET['p']);
+$password = md5($configs['salt'].$_GET['p']);
 
 $sth = $conn->prepare('SELECT uuid FROM users WHERE username = ? and password = ?');
 $sth->bind_param('ss', $username, $password);

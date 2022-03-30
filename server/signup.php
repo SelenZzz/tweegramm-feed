@@ -8,7 +8,7 @@ if (!isset($_GET['u']) || !isset($_GET['p']) || !isset($_GET['e'])) {
 }
 
 $username = $_GET['u'];
-$password = md5($_GET['p']);
+$password = md5($configs['salt'].$_GET['p']);
 $email    = $_GET['e'];
 
 $sth = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?,?,?)");
