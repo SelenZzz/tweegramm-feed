@@ -9,7 +9,8 @@ $conn = require 'utils/connection.php';
 $token = $data["token"];
 $uuid  = $token === '' ? '' : get_uuid($token);
 
-$sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media, t.likes,
+$sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media,
+	(SELECT COUNT(l.uuid) FROM likes l WHERE l.post_uuid = t.uuid) as likes,
     (SELECT COUNT(l.uuid) FROM likes l WHERE l.user_uuid = ? AND l.post_uuid = t.uuid) as liked,
     UNIX_TIMESTAMP(t.created_at)*1000 as createdAt
     FROM posts t LEFT JOIN users u ON t.user_uuid = u.uuid

@@ -29,14 +29,8 @@ $sth->bind_param('ss', $post, $uuid);
 $sth->execute();
 $sth->close();
 
-$add_value = ($is_liked == 1 ? -1 : +1);
-
-$sth = $conn->prepare('UPDATE posts SET likes = likes + ? WHERE uuid = ?');
-$sth->bind_param('is', $add_value, $post);
-$sth->execute();
-$sth->close();
-
-$sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media, t.likes,
+$sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media,
+    (SELECT COUNT(l.uuid) FROM likes l WHERE l.post_uuid = t.uuid) as likes,
     (SELECT COUNT(l.uuid) FROM likes l WHERE l.user_uuid = ? AND l.post_uuid = ?) as liked,
     UNIX_TIMESTAMP(t.created_at)*1000 as createdAt
     FROM posts t
