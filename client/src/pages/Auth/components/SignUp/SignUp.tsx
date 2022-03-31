@@ -21,7 +21,7 @@ import { Loading } from '../Loading/Loading';
 
 export const SignUp = () => {
   // prettier-ignore
-  const [username, setUsername, isUsernameValid] = useStateValidation<string>((v: string) => v.length > 5,'');
+  const [username, setUsername, isUsernameValid] = useStateValidation<string>((v: string) => v.length > 5 && v.match(/^[a-zA-Z0-9]+$/),'');
   // prettier-ignore
   const [email, setEmail, isEmailValid] = useStateValidation<string>((v: string) => v.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),'');
   // prettier-ignore

@@ -42,7 +42,11 @@ export const Info = ({
         type="text"
         placeholder="username"
         alert={username.length !== 0 && !isUsernameValid}
-        alertText={'username must be at least 5 symbols'}
+        alertText={
+          username.match(/^[a-zA-Z]+$/)
+            ? 'username must be at least 5 symbols'
+            : 'username can consist only of english letters and numbers'
+        }
         maxLen={50}
       />
       <Input
