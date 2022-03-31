@@ -1,7 +1,7 @@
 <?php
 
-include 'utils/cors.php';
-$conn = include 'utils/connection.php';
+require 'utils/cors.php';
+$conn = require 'utils/connection.php';
 
 $sth = $conn->prepare("SHOW TABLES;");
 $sth->execute();

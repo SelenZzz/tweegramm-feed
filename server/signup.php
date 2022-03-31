@@ -1,6 +1,6 @@
 <?php
 $data = json_decode(file_get_contents('php://input'), true);
-if (!isset($data['username']) || !isset($data['password']) || !isset($data['email'])) {
+if (!isset($data['username']) || !isset($data['password']) || !isset($data['email']) || !isset($data['userAgent'])) {
     die("Missing url parameters");
 }
 
@@ -10,6 +10,7 @@ $conn = require 'utils/connection.php';
 $username = $data['username'];
 $password = md5($configs['salt'].$data['password']);
 $email    = $data['email'];
+$agent    = $data['userAgent'];
 
 $sth = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?,?,?)");
 $sth->bind_param('sss', $username, $password, $email);
@@ -23,6 +24,6 @@ $sth->bind_result($uuid);
 $sth->fetch();
 $sth->close();
 
-require 'utils/create_token.php';
-$res = tokenize($uuid, $username);
+require 'utils/sessions.php';
+$res['token'] = add_session($uuid, $agent);
 echo json_encode($res);

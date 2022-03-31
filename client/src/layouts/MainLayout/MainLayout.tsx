@@ -1,22 +1,21 @@
 import styles from './MainLayout.module.css';
 
+// react
 import { useState } from 'react';
-
 import { Outlet } from 'react-router-dom';
 
-import { SignUpAlert } from '../../components/SignUpAlert/SignUpAlert';
-
-import { selectLogged } from '../../redux/userSlice';
-import { useSelector } from 'react-redux';
+// hooks
+import { usePageName } from '../../hooks/usePageName';
+import { useToken } from '../../hooks/useToken';
 
 // components
 import { LoginModal, SignUpModal } from '../../pages/Auth/Auth';
+import { SignUpAlert } from '../../components/SignUpAlert/SignUpAlert';
 import { Navbar } from './components/Navbar/Navbar';
 import { Tags } from './components/Tagbar/TagBar';
-import { usePageName } from '../../hooks/usePageName';
 
 export const MainLayout = () => {
-  const logged = useSelector(selectLogged);
+  const { token, setToken } = useToken();
 
   const [showSignUpModal, setSignUpModal] = useState(false);
   const [showLoginModal, setLoginModal] = useState(false);
@@ -27,7 +26,7 @@ export const MainLayout = () => {
     <>
       {showSignUpModal && <SignUpModal onCloseRequest={() => setSignUpModal(false)} />}
       {showLoginModal && <LoginModal onCloseRequest={() => setLoginModal(false)} />}
-      {!logged && (
+      {(!token || token === '') && (
         <SignUpAlert
           onSignUpClick={() => setSignUpModal(true)}
           onLoginClick={() => setLoginModal(true)}

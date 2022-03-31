@@ -11,8 +11,9 @@ import { iUser } from '../utils/types';
 export const GetSignUp = () => {
   const navigate = useNavigate();
   const { token, setToken } = useToken();
+  const userAgent = navigator.userAgent;
 
-  const signUp = (newUser: iUser) => {
+  const signUp = async (newUser: iUser) => {
     const { username, password, email, birthday } = newUser;
     fetch(`${url}/signup.php`, {
       method: 'POST',
@@ -21,6 +22,7 @@ export const GetSignUp = () => {
         password: password,
         email: email,
         birthday: birthday,
+        userAgent: userAgent,
       }),
     })
       .then((response) => response.json())
@@ -38,13 +40,17 @@ export const GetSignUp = () => {
 export const GetLogin = () => {
   const navigate = useNavigate();
   const { token, setToken } = useToken();
+  const userAgent = navigator.userAgent.slice(0, 32);
 
-  const login = (user: iUser) => {
+  const login = async (user: iUser) => {
     const { username, password } = user;
-    // const userAgent = navigator.userAgent; // TODO: token auth
     fetch(`${url}/login.php`, {
       method: 'POST',
-      body: JSON.stringify({ username: username, password: password }),
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        userAgent: userAgent,
+      }),
     })
       .then((response) => response.json())
       .then((responseJson: { token: string }) => {

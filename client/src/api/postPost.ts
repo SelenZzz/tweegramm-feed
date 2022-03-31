@@ -1,23 +1,27 @@
 // utils
 import { url } from '../utils/config';
 
-// redux
-import { selectUserUid } from '../redux/userSlice';
-import { useSelector } from 'react-redux';
+// react
 import { useCallback } from 'react';
 
+// hooks
+import { useToken } from '../hooks/useToken';
+
 export const PostPost = () => {
-  const uuid = useSelector(selectUserUid);
+  const { token, setToken } = useToken();
 
   const sendPost = useCallback(
     (text: string) => {
-      const response = fetch(`${url}/send_post.php`, {
-        method: 'POST',
-        body: JSON.stringify({ uuid, text }),
-      }).then((response) => response.ok);
-      return response;
+      if (token) {
+        const response = fetch(`${url}/send_post.php`, {
+          method: 'POST',
+          body: JSON.stringify({ token: token, text: text }),
+        }).then((response) => response.ok);
+        return response;
+      }
+      return false;
     },
-    [uuid],
+    [token],
   );
 
   return { sendPost };

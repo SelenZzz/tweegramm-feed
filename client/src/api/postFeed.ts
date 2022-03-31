@@ -8,30 +8,25 @@ import { iPost } from '../utils/types';
 //hooks
 import { useToken } from '../hooks/useToken';
 
-// redux
-import { selectUserUid } from '../redux/userSlice';
-import { useSelector } from 'react-redux';
-
 export const GetFeed = () => {
   const { token, setToken } = useToken();
-  const uuid = useSelector(selectUserUid);
   const [posts, setPosts] = useState<iPost[]>([]);
 
   useEffect(() => {
-    if (uuid || !token) getFeed();
-  }, [uuid]);
+    getFeed();
+  }, [token]);
 
-  const getFeed = useCallback(() => {
+  const getFeed = async () => {
     const response = fetch(`${url}/feed.php`, {
       method: 'POST',
-      body: JSON.stringify({ uuid: uuid }),
+      body: JSON.stringify({ token: token || '' }),
     })
       .then((response) => response.json())
       .then((responseJson: iPost[]) => {
         setPosts(responseJson);
       });
     return response;
-  }, [uuid]);
+  };
 
   return { posts, getFeed };
 };

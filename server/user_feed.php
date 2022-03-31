@@ -1,13 +1,16 @@
 <?php
 $data = json_decode(file_get_contents('php://input'), true);
-if (!isset($data['uuid']) || !isset($data['username'])) {
+if (!isset($data['token']) || !isset($data['username'])) {
     die('Missing url parameters');
 }
 
 require 'utils/cors.php';
+require 'utils/sessions.php';
 $conn = require 'utils/connection.php';
 
-$uuid     = $data['uuid'];
+$token = $data['token'];
+renew_token($token);
+$uuid     = $token === '' ? '' : get_uuid($token);
 $username = $data['username'];
 
 $sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media, t.likes,

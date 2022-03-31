@@ -4,13 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // hooks
 import { useNetworkStatus } from './hooks/useNetworkStatus';
-import { useToken } from './hooks/useToken';
 
 // redux
-import { useDispatch, Provider } from 'react-redux';
-import { userActions } from './redux/userSlice';
+import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import jwt_decode from 'jwt-decode';
+
 // layout
 import { MainLayout } from './layouts/MainLayout/MainLayout';
 
@@ -20,19 +18,17 @@ import { Feed } from './pages/Feed/Feed';
 import { Profile } from './pages/Profile/Profile';
 import { LoginModal, SignUpModal } from './pages/Auth/Auth';
 import { Friends } from './pages/Friends/Friends';
+import { useToken } from './hooks/useToken';
+import { InitUser } from './api/postInitUser';
 
 const App = () => {
-  const dispatch = useDispatch();
   const { token, setToken } = useToken();
-
+  const { initUser } = InitUser();
   const { isOnline } = useNetworkStatus();
   console.log(isOnline ? 'Connection established' : 'No connection');
 
   useEffect(() => {
-    if (token) {
-      const user = jwt_decode<any>(token).data;
-      dispatch(userActions.login({ user }));
-    }
+    if (token) initUser();
   }, [token]);
 
   return (

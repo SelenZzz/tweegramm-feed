@@ -1,30 +1,27 @@
 <?php
 
-$configs = require 'config.php';
-
 require 'vendor/autoload.php';
 use Firebase\JWT\JWT;
 
-function tokenize($uuid, $username)
+function tokenize($uuid, $agent)
 {
-    if (!isset($uuid) || !isset($username)) {
+    if (!isset($uuid) || !isset($agent)) {
         $token = '';
     } else {
-        global $configs;
-        $now   = strtotime('now');
-        $token = JWT::encode([
+        $configs = require 'config.php';
+        $now     = strtotime('now');
+        $token   = JWT::encode([
             'iat' => $now, //WHEN TOKEN IS GENERATED
             'nbf' => $now, // WHEN TOKEN IS CONSIDERED VALID
-            'exp' => $now + 3600, // EXPIRY 1 HR FROM NOW
+            'exp' => $now + $configs['JWT_EXPIRY'], // EXPIRY 1 HR FROM NOW
             'jti' => base64_encode(random_bytes(16)), // ID
             'iss' => $configs['JWT_ISSUER'], // ISSUER
             'aud' => $configs['JWT_AUD'], // AUDIENCE
             'data' => [
-                'uuid'     => $uuid,
-                'username' => $username,
+                'uuid'  => $uuid,
+                'agent' => $agent,
             ],
         ], $configs['JWT_SECRET'], $configs['JWT_ALGO']);
     }
-    $res['token'] = $token;
-    return $res;
+    return $token;
 }

@@ -1,7 +1,8 @@
 import styles from './Profile.module.css';
 
 // react
-import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // components
 import { PostInput } from '../../components/PostInput/PostInput';
@@ -12,20 +13,33 @@ import { Post } from '../../components/Post/Post';
 import { useSelector } from 'react-redux';
 import { selectUserUsername } from '../../redux/userSlice';
 
+// hooks
+import { useToken } from '../../hooks/useToken';
+
 // utils
 import { GetUserFeed } from '../../api/postUserFeed';
 
 export const Profile = () => {
+  const { token, setToken } = useToken();
+  const navigate = useNavigate();
   const location = useLocation();
   const currentUsername = useSelector(selectUserUsername);
   const pathname = location.pathname.split('/').pop();
   const profileName = pathname!.toLowerCase() === 'profile' ? currentUsername : pathname;
 
-  const { posts, getUserFeed } = GetUserFeed(profileName!);
+  const { posts, getUserFeed } = GetUserFeed();
 
   const currentUserPage =
     currentUsername?.toLowerCase() === pathname?.toLowerCase() ||
     pathname?.toLowerCase() === 'profile';
+
+  useEffect(() => {
+    if (pathname!.toLowerCase() === 'profile' && token === '') navigate('/');
+  }, [pathname]);
+
+  useEffect(() => {
+    if (profileName) getUserFeed(profileName);
+  }, [profileName]);
 
   return (
     <>

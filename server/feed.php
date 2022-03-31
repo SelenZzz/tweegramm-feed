@@ -1,13 +1,15 @@
 <?php
 $data = json_decode(file_get_contents('php://input'), true);
-if (!isset($data["uuid"])) {
-    $uuid = ' ';
-} else {
-    $uuid = $data["uuid"];
+if (!isset($data["token"])) {
+    die('Missing parameters');
 }
 
-include 'utils/cors.php';
-$conn = include 'utils/connection.php';
+require 'utils/cors.php';
+require 'utils/sessions.php';
+$conn = require 'utils/connection.php';
+
+$token = $data["token"];
+$uuid  = $token === '' ? '' : get_uuid($token);
 
 $sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media, t.likes,
     (SELECT COUNT(l.uuid) FROM likes l WHERE l.user_uuid = ? AND l.post_uuid = t.uuid) as liked,
