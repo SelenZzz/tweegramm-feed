@@ -12,6 +12,8 @@ import { useGetRequest } from '../hooks/useGetRequest';
 export const GetAuth = () => {
   const navigate = useNavigate();
   const { token, setToken } = useToken();
+  const userAgent = navigator.userAgent.slice(0, 128);
+
   const { getRequest: loginRequest } = useGetRequest(`${url}/login.php`, (r) =>
     onResponse(r),
   );
@@ -21,7 +23,6 @@ export const GetAuth = () => {
 
   const login = async (user: iUser) => {
     const { username, password } = user;
-    const userAgent = navigator.userAgent.slice(0, 32);
     loginRequest({
       username: username,
       password: password,
@@ -31,7 +32,6 @@ export const GetAuth = () => {
 
   const signUp = async (newUser: iUser) => {
     const { username, password, email, birthday } = newUser;
-    const userAgent = navigator.userAgent.slice(0, 32);
     signUpRequest({
       username: username,
       password: password,
