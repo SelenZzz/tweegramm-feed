@@ -19,7 +19,7 @@ $sth->execute();
 $sth->close();
 
 $sth = $conn->prepare("SELECT p.uuid, u.username, p.text, p.media,
-    (SELECT COUNT(l.uuid) FROM likes l WHERE l.post_uuid = t.uuid) as likes,
+    (SELECT COUNT(l.uuid) FROM likes l WHERE l.post_uuid = p.uuid) as likes,
     (SELECT COUNT(l.uuid) FROM likes l WHERE l.user_uuid = ? AND l.post_uuid = p.uuid) as liked,
     UNIX_TIMESTAMP(p.created_at)*1000 as createdAt
     FROM posts p LEFT JOIN users u ON p.user_uuid = u.uuid
