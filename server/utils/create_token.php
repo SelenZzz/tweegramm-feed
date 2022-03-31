@@ -19,7 +19,7 @@ function tokenize($uuid, $agent)
             'aud' => $configs['JWT_AUD'], // AUDIENCE
             'data' => [
                 'uuid'  => $uuid,
-                'agent' => $agent,
+                'agent' => substr($agent, 0, 5),
             ],
         ], $configs['JWT_SECRET'], $configs['JWT_ALGO']);
     }
