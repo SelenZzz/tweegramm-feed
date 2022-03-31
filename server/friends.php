@@ -1,7 +1,12 @@
 <?php
+require 'utils/parse_parameters.php';
+$data = check_get_parameters("token");
 
 require 'utils/cors.php';
 $conn = require 'utils/connection.php';
+
+$token = $data["token"];
+renew_token($token);
 
 $sth = $conn->prepare("SELECT uuid, username, email FROM users ORDER BY username ASC");
 $sth->execute();

@@ -7,7 +7,8 @@ require 'utils/sessions.php';
 $conn = require 'utils/connection.php';
 
 $token = $data["token"];
-$uuid  = $token === '' ? '' : get_uuid($token);
+renew_token($token);
+$uuid = $token === '' ? '' : get_uuid($token);
 
 $sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media,
 	(SELECT COUNT(l.uuid) FROM likes l WHERE l.post_uuid = t.uuid) as likes,
