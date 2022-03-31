@@ -22,11 +22,15 @@ export const GetFeed = () => {
   }, [uuid]);
 
   const getFeed = useCallback(() => {
-    fetch(`${url}/feed.php?u=${uuid}`)
+    const response = fetch(`${url}/feed.php`, {
+      method: 'POST',
+      body: JSON.stringify({ uuid: uuid }),
+    })
       .then((response) => response.json())
       .then((responseJson: iPost[]) => {
         setPosts(responseJson);
       });
+    return response;
   }, [uuid]);
 
   return { posts, getFeed };

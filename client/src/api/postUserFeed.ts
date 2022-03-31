@@ -22,7 +22,10 @@ export const GetUserFeed = (username: string) => {
   }, [uuid]);
 
   const getUserFeed = useCallback(() => {
-    fetch(`${url}/user_feed.php?u=${uuid}&n=${username}`)
+    fetch(`${url}/user_feed.php`, {
+      method: 'POST',
+      body: JSON.stringify({ uuid: uuid || '', username: username }),
+    })
       .then((response) => response.json())
       .then((responseJson: iPost[]) => {
         setPosts(responseJson);

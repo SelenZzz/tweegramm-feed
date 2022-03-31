@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { selectUserUsername } from '../../redux/userSlice';
 
 // utils
-import { GetUserFeed } from '../../api/getUserFeed';
+import { GetUserFeed } from '../../api/postUserFeed';
 
 export const Profile = () => {
   const location = useLocation();

@@ -1,14 +1,14 @@
 <?php
-
-include 'utils/cors.php';
-$conn = include 'utils/connection.php';
-
-if (!isset($_GET['u']) || !isset($_GET['t'])) {
-    die("Missing url parameters");
+$data = json_decode(file_get_contents('php://input'), true);
+if (!isset($data['uuid']) || !isset($data['text'])) {
+    die("Missing POST parameters");
 }
 
-$user_uuid = $_GET['u'];
-$text      = $_GET['t'];
+require 'utils/cors.php';
+$conn = require 'utils/connection.php';
+
+$user_uuid = $data['uuid'];
+$text      = $data['text'];
 
 $sth = $conn->prepare("INSERT INTO posts(user_uuid, text) VALUES (?, ?)");
 $sth->bind_param('ss', $user_uuid, $text);

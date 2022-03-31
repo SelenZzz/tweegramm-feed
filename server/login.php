@@ -1,5 +1,6 @@
 <?php
-if (!isset($_GET['u']) || !isset($_GET['p'])) {
+$data = json_decode(file_get_contents('php://input'), true);
+if (!isset($data['username']) || !isset($data['password'])) {
     die('Missing url parameters');
 }
 
@@ -7,8 +8,8 @@ require 'utils/cors.php';
 $conn    = require 'utils/connection.php';
 $configs = require 'utils/config.php';
 
-$username = $_GET['u'];
-$password = md5($configs['salt'].$_GET['p']);
+$username = $data['username'];
+$password = md5($configs['salt'].$data['password']);
 
 $sth = $conn->prepare('SELECT uuid FROM users WHERE username = ? and password = ?');
 $sth->bind_param('ss', $username, $password);

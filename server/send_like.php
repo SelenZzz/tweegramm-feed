@@ -1,14 +1,14 @@
 <?php
-
-$cors = include 'utils/cors.php';
-$conn = include 'utils/connection.php';
-
-if (!isset($_GET['u']) || !isset($_GET['p'])) {
+$data = json_decode(file_get_contents('php://input'), true);
+if (!isset($data['uuid']) || !isset($data['post_uuid'])) {
     die("Missing url parameters");
 }
 
-$uuid = $_GET['u'];
-$post = $_GET['p'];
+$cors = require 'utils/cors.php';
+$conn = require 'utils/connection.php';
+
+$uuid = $data['uuid'];
+$post = $data['post_uuid'];
 
 $sth = $conn->prepare('SELECT COUNT(l.uuid) FROM likes l WHERE l.user_uuid = ? AND l.post_uuid = ?');
 $sth->bind_param('ss', $uuid, $post);

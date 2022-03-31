@@ -14,7 +14,15 @@ export const GetSignUp = () => {
 
   const signUp = (newUser: iUser) => {
     const { username, password, email, birthday } = newUser;
-    fetch(`${url}/signup.php?u=${username}&p=${password}&e=${email}&b=${birthday}`)
+    fetch(`${url}/signup.php`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        email: email,
+        birthday: birthday,
+      }),
+    })
       .then((response) => response.json())
       .then((responseJson: { token: string }) => {
         if (responseJson.token.length > 0) {
@@ -33,7 +41,11 @@ export const GetLogin = () => {
 
   const login = (user: iUser) => {
     const { username, password } = user;
-    fetch(`${url}/login.php?u=${username}&p=${password}`)
+    // const userAgent = navigator.userAgent; // TODO: token auth
+    fetch(`${url}/login.php`, {
+      method: 'POST',
+      body: JSON.stringify({ username: username, password: password }),
+    })
       .then((response) => response.json())
       .then((responseJson: { token: string }) => {
         console.log(responseJson);

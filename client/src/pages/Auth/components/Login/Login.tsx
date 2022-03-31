@@ -14,7 +14,7 @@ import { iUser } from '../../../../utils/types';
 import { Credentials } from './components/Credentials/Credentials';
 import { BigButton } from '../../../../components/BigButton/BigButton';
 import { Loading } from '../Loading/Loading';
-import { GetLogin } from '../../../../api/getAuth';
+import { GetLogin } from '../../../../api/postAuth';
 
 export const Login = () => {
   // prettier-ignore

@@ -8,7 +8,7 @@ import { useStateValidation } from '../../../../hooks/useStateValidation';
 import { useTimeout } from '../../../../hooks/useTimeout';
 
 // api
-import { GetSignUp } from '../../../../api/getAuth';
+import { GetSignUp } from '../../../../api/postAuth';
 
 // utils
 import { iUser } from '../../../../utils/types';

@@ -1,13 +1,13 @@
 <?php
+$data = json_decode(file_get_contents('php://input'), true);
+if (!isset($data["uuid"])) {
+    $uuid = ' ';
+} else {
+    $uuid = $data["uuid"];
+}
 
 include 'utils/cors.php';
 $conn = include 'utils/connection.php';
-
-if (!isset($_GET['u'])) {
-    $uuid = ' ';
-} else {
-    $uuid = $_GET['u'];
-}
 
 $sth = $conn->prepare("SELECT t.uuid, u.username, t.text, t.media, t.likes,
     (SELECT COUNT(l.uuid) FROM likes l WHERE l.user_uuid = ? AND l.post_uuid = t.uuid) as liked,

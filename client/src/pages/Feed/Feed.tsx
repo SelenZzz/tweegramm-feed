@@ -13,7 +13,7 @@ import { NothingFound } from '../../components/NothingFound/NothingFound';
 import { Spinner } from '../../components/Spinner/Spinner';
 
 // utils
-import { GetFeed } from '../../api/getFeed';
+import { GetFeed } from '../../api/postFeed';
 
 // redux
 import { selectLogged } from '../../redux/userSlice';

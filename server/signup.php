@@ -1,15 +1,15 @@
 <?php
-
-include 'utils/cors.php';
-$conn = include 'utils/connection.php';
-
-if (!isset($_GET['u']) || !isset($_GET['p']) || !isset($_GET['e'])) {
+$data = json_decode(file_get_contents('php://input'), true);
+if (!isset($data['username']) || !isset($data['password']) || !isset($data['email'])) {
     die("Missing url parameters");
 }
 
-$username = $_GET['u'];
-$password = md5($configs['salt'].$_GET['p']);
-$email    = $_GET['e'];
+require 'utils/cors.php';
+$conn = require 'utils/connection.php';
+
+$username = $data['username'];
+$password = md5($configs['salt'].$data['password']);
+$email    = $data['email'];
 
 $sth = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?,?,?)");
 $sth->bind_param('sss', $username, $password, $email);
