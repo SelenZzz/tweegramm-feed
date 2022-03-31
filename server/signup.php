@@ -1,8 +1,6 @@
 <?php
-$data = json_decode(file_get_contents('php://input'), true);
-if (!isset($data['username']) || !isset($data['password']) || !isset($data['email']) || !isset($data['userAgent'])) {
-    die("Missing url parameters");
-}
+require 'utils/parse_parameters.php';
+$data = check_get_parameters("username", "password", "email", "userAgent");
 
 require 'utils/cors.php';
 $conn = require 'utils/connection.php';

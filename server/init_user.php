@@ -1,8 +1,6 @@
 <?php
-$data = json_decode(file_get_contents('php://input'), true);
-if (!isset($data["token"])) {
-    die('Missing parameters');
-}
+require 'utils/parse_parameters.php';
+$data = check_get_parameters("token");
 
 require 'utils/cors.php';
 require 'utils/sessions.php';

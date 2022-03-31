@@ -14,7 +14,7 @@ import { iUser } from '../../../../utils/types';
 import { Credentials } from './components/Credentials/Credentials';
 import { BigButton } from '../../../../components/BigButton/BigButton';
 import { Loading } from '../Loading/Loading';
-import { GetLogin } from '../../../../api/postAuth';
+import { GetAuth } from '../../../../api/getAuth';
 
 export const Login = () => {
   // prettier-ignore
@@ -27,7 +27,7 @@ export const Login = () => {
   const { start: startTimer, clear: clearTimer  } = useTimeout(() => setError(true), 3000);
   const [error, setError] = useState<boolean>(false);
 
-  const { login } = GetLogin();
+  const { signUp, login } = GetAuth();
 
   const headers = ['Login into your account', 'Almost done...', 'Something went wrong'];
   const buttonLabels = ['Log In', 'Wait a little bit', ':c'];

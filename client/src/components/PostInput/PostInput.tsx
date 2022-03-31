@@ -2,7 +2,7 @@ import styles from './PostInput.module.css';
 import cx from 'classnames';
 
 // react
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // utils
 import { PostPost } from '../../api/postPost';
@@ -10,12 +10,14 @@ import { PostPost } from '../../api/postPost';
 // components
 import TextareaAutosize from 'react-textarea-autosize';
 import { Avatar } from '../Avatar/Avatar';
+import { iPost } from '../../utils/types';
 
 export const PostInput = ({ onSend }: { onSend: any }) => {
   const [showPlaceholder, setPlaceholder] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [input, setInput] = useState<string>('');
-  const { sendPost } = PostPost();
+  const [sendResponse, setSendResponse] = useState<iPost>();
+  const { sendPost } = PostPost((r) => setSendResponse(r));
 
   const handleInput = (value: string) => {
     if (value.length > 255) value = value.slice(0, 255);
@@ -25,13 +27,16 @@ export const PostInput = ({ onSend }: { onSend: any }) => {
   };
 
   const handleSend = async () => {
-    const response = await sendPost(input);
-    if (response) {
+    sendPost(input);
+  };
+
+  useEffect(() => {
+    if (sendResponse) {
       setInput('');
       setPlaceholder(true);
       onSend();
     }
-  };
+  }, [sendResponse]);
 
   return (
     <div className={styles.post}>

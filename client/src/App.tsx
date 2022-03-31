@@ -19,7 +19,7 @@ import { Profile } from './pages/Profile/Profile';
 import { LoginModal, SignUpModal } from './pages/Auth/Auth';
 import { Friends } from './pages/Friends/Friends';
 import { useToken } from './hooks/useToken';
-import { InitUser } from './api/postInitUser';
+import { InitUser } from './api/getInitUser';
 
 const App = () => {
   const { token, setToken } = useToken();

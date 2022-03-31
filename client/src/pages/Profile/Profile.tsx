@@ -17,7 +17,7 @@ import { selectUserUsername } from '../../redux/userSlice';
 import { useToken } from '../../hooks/useToken';
 
 // utils
-import { GetUserFeed } from '../../api/postUserFeed';
+import { GetUserFeed } from '../../api/getUserFeed';
 
 export const Profile = () => {
   const { token, setToken } = useToken();

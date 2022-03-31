@@ -1,28 +1,18 @@
 // utils
 import { url } from '../utils/config';
-
-// react
-import { useCallback } from 'react';
+import { iPost } from '../utils/types';
 
 // hooks
 import { useToken } from '../hooks/useToken';
+import { usePostRequest } from '../hooks/usePostRequest';
 
-export const PostPost = () => {
+export const PostPost = (onResponse: (json: iPost) => void) => {
   const { token, setToken } = useToken();
+  const { postRequest } = usePostRequest(`${url}/send_post.php`, (r) => onResponse(r));
 
-  const sendPost = useCallback(
-    (text: string) => {
-      if (token) {
-        const response = fetch(`${url}/send_post.php`, {
-          method: 'POST',
-          body: JSON.stringify({ token: token, text: text }),
-        }).then((response) => response.ok);
-        return response;
-      }
-      return false;
-    },
-    [token],
-  );
+  const sendPost = async (text: string) => {
+    postRequest({ token: token, text: text });
+  };
 
   return { sendPost };
 };

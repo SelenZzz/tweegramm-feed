@@ -8,7 +8,7 @@ import { useStateValidation } from '../../../../hooks/useStateValidation';
 import { useTimeout } from '../../../../hooks/useTimeout';
 
 // api
-import { GetSignUp } from '../../../../api/postAuth';
+import { GetAuth } from '../../../../api/getAuth';
 
 // utils
 import { iUser } from '../../../../utils/types';
@@ -40,7 +40,7 @@ export const SignUp = () => {
   const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 3000);
   const [error, setError] = useState<boolean>(false);
 
-  const { signUp } = GetSignUp();
+  const { signUp, login } = GetAuth();
   // prettier-ignore
   const headers = ['Create your account', 'Setup a password', 'Almost done...','Something went wrong'];
   const buttonLabels = ['Next', 'Finish', 'Wait a little bit', ':c'];

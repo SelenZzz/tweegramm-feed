@@ -1,31 +1,18 @@
-// react
-import { useCallback } from 'react';
-
 // utils
 import { url } from '../utils/config';
 import { iPost } from '../utils/types';
 
 //hooks
 import { useToken } from '../hooks/useToken';
+import { usePostRequest } from '../hooks/usePostRequest';
 
-export const PostLike = () => {
+export const PostLike = (onResponse: (json: iPost) => void) => {
   const { token, setToken } = useToken();
+  const { postRequest } = usePostRequest(`${url}/send_like.php`, (r) => onResponse(r));
 
-  const postLike = useCallback(
-    (post_uuid: string) => {
-      if (token) {
-        const response = fetch(`${url}/send_like.php`, {
-          method: 'POST',
-          body: JSON.stringify({ token: token, post_uuid: post_uuid }),
-        })
-          .then((response) => response.json())
-          .then((responseJson: iPost) => responseJson);
-        return response;
-      }
-      return false;
-    },
-    [token],
-  );
+  const postLike = async (post_uuid: string) => {
+    postRequest({ token: token, post_uuid: post_uuid });
+  };
 
   return { postLike };
 };
