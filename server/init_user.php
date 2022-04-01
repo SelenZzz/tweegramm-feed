@@ -12,6 +12,7 @@ if (is_token_expired($token) === 1) {
     die(json_encode($username));
 }
 renew_token($token);
+expire_old_tokens($token);
 
 $sth = $conn->prepare("SELECT u.username FROM users u LEFT JOIN sessions s
     ON u.uuid = s.user_uuid WHERE s.token = ?");

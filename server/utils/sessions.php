@@ -56,10 +56,11 @@ function is_token_expired($token)
     }
     $configs = require 'config.php';
     $conn    = require 'connection.php';
-    $sth     = $conn->prepare('SELECT CASE WHEN
+    $sth     = $conn->prepare('SELECT IF (
         (SELECT TIMESTAMPDIFF (SECOND, (SELECT last_usage FROM sessions WHERE token = ?), CURRENT_TIMESTAMP)) > ?
-        THEN 1 ELSE 0 END AS expired');
-    $sth->bind_param('si', $token, $configs['JWT_EXPIRY']);
+        OR (SELECT COUNT(expired) FROM sessions WHERE expired = 1 AND token = ?) > 0,
+        1, 0) AS expired');
+    $sth->bind_param('sis', $token, $configs['JWT_EXPIRY'], $token);
     $sth->execute();
 
     $sth->bind_result($expired);
@@ -72,12 +73,26 @@ function is_token_expired($token)
 function expire_token($token)
 {
     if (!isset($token) || $token === '') {
-        return "logged out";
+        return "token is not set";
+    }
+    $conn = require 'connection.php';
+    $sth  = $conn->prepare('UPDATE sessions s SET s.expired=1 WHERE s.token = ?');
+    $sth->bind_param('s', $token);
+    $sth->execute();
+    return "token expired";
+}
+
+function expire_old_tokens($token)
+{
+    if (!isset($token) || $token === '') {
+        return "missing token";
     }
     $configs = require 'config.php';
     $conn    = require 'connection.php';
-    $sth     = $conn->prepare('UPDATE sessions s SET s.expired=1 WHERE s.user_uuid = (SELECT s.user_uuid FROM sessions s WHERE s.token = ?)');
-    $sth->bind_param('s', $token);
+    $sth     = $conn->prepare('UPDATE sessions s SET s.expired=1
+        WHERE (SELECT TIMESTAMPDIFF (SECOND, s.last_usage, CURRENT_TIMESTAMP)) > ?
+        AND s.user_uuid = (SELECT s.user_uuid FROM sessions s WHERE s.token = ?)');
+    $sth->bind_param('ss', $configs['JWT_EXPIRY'], $token);
     $sth->execute();
-    return "logged out";
+    return "done";
 }

@@ -9,4 +9,5 @@ $conn = require 'utils/connection.php';
 $token = $data['token'];
 
 $res['response'] = expire_token($token);
+expire_old_tokens($token);
 echo json_encode($res);
