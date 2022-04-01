@@ -1,5 +1,7 @@
+import styles from './Friends.module.css';
+
 // react
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 // utils
 import { GetFriends } from '../../api/getFriends';
@@ -7,21 +9,32 @@ import { GetFriends } from '../../api/getFriends';
 // components
 import { User } from './components/User/User';
 
-const friendsList = [
-  { uuid: '1', name: 'Александр', info: 'Listening to Secret Garden' },
-  { uuid: '2', name: 'Юля', info: 'абобус' },
-  { uuid: '3', name: 'Александр', info: 'абобус' },
-  { uuid: '4', name: 'Юля', info: 'Listening to Secret Garden' },
-];
+// hooks
+import { useTimeout } from '../../hooks/useTimeout';
+import { Spinner } from '../../components/Spinner/Spinner';
+import { NothingFound } from '../../components/NothingFound/NothingFound';
 
 export const Friends = () => {
+  const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 1000);
+  const [error, setError] = useState<boolean>(false);
   const { friends, getFriends } = GetFriends();
+
+  useEffect(() => {
+    clearTimer();
+    startTimer();
+  }, []);
 
   return (
     <div>
       {friends.map((e) => {
         return <User key={e.uuid} name={e.username} info={e.info || ''} />;
       })}
+      {friends.length === 0 && error && <NothingFound />}
+      {!error && friends.length === 0 && (
+        <div className={styles.spinner}>
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };
