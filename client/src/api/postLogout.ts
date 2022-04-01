@@ -4,16 +4,23 @@ import { useContext } from 'react';
 
 // hooks
 import { useToken } from '../hooks/useToken';
+import { usePostRequest } from '../hooks/usePostRequest';
+
+// utils
+import { url } from '../utils/config';
 
 export const PostLogout = () => {
   const userContext = useContext(UserContext);
+  const { postRequest } = usePostRequest(`${url}/logout.php`, (r) => {
+    window.location.reload();
+  });
   const { token, setToken } = useToken();
 
-  const postLogout = () => {
+  const postLogout = async () => {
     userContext.setLogged(false);
     userContext.setUsername('');
     setToken({ token: '' });
-    window.location.reload();
+    postRequest({ token: token || '' });
   };
 
   return { postLogout };

@@ -5,12 +5,16 @@ import { useContext } from 'react';
 // utils
 import { url } from '../utils/config';
 
-//hooks
+// hooks
 import { useToken } from '../hooks/useToken';
 import { useGetRequest } from '../hooks/useGetRequest';
 
+// api
+import { PostLogout } from './postLogout';
+
 export const InitUser = () => {
   const userContext = useContext(UserContext);
+  const { postLogout } = PostLogout();
   const { token, setToken } = useToken();
 
   const { getRequest } = useGetRequest(
@@ -19,13 +23,7 @@ export const InitUser = () => {
       userContext.setLogged(true);
       userContext.setUsername(r);
     },
-    () => {
-      userContext.setLogged(false);
-      userContext.setUsername('');
-
-      setToken({ token: '' });
-      window.location.reload();
-    },
+    () => postLogout(),
   );
 
   const initUser = async () => {

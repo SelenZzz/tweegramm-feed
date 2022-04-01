@@ -68,3 +68,16 @@ function is_token_expired($token)
 
     return $expired;
 }
+
+function expire_token($token)
+{
+    if (!isset($token) || $token === '') {
+        return "logged out";
+    }
+    $configs = require 'config.php';
+    $conn    = require 'connection.php';
+    $sth     = $conn->prepare('UPDATE sessions s SET s.expired=1 WHERE s.user_uuid = (SELECT s.user_uuid FROM sessions s WHERE s.token = ?)');
+    $sth->bind_param('s', $token);
+    $sth->execute();
+    return "logged out";
+}
