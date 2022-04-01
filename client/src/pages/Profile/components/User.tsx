@@ -12,9 +12,7 @@ export const User = ({ username }: { username: string }) => {
       <div className={styles.info}>
         <div className={styles.username}>{username}</div>
         <div className={styles.bio}>
-          {
-            "Hello guys just a test bio, i'm programmer. ReactJS+TS+Redux and other stuff <3"
-          }
+          {"Hello guys just a test bio, i'm programmer. ReactJS+TS and other stuff <3"}
         </div>
       </div>
     </div>

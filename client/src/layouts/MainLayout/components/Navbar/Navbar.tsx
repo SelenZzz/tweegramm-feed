@@ -1,5 +1,9 @@
 import styles from './Navbar.module.css';
 
+// react
+import { UserContext } from '../../../../App';
+import { useContext } from 'react';
+
 // icons
 import HomeIcon from '@mui/icons-material/Home';
 import TagIcon from '@mui/icons-material/Tag';
@@ -19,12 +23,8 @@ import { Item } from './components/Item/Item';
 import { Logo } from './components/Logo/Logo';
 import { Account } from './components/Account/Account';
 
-// redux
-import { useSelector } from 'react-redux';
-import { selectLogged } from '../../../../redux/userSlice';
-
 export const Navbar = () => {
-  const logged = useSelector(selectLogged);
+  const userContext = useContext(UserContext);
 
   return (
     <div className={styles.container}>
@@ -56,7 +56,7 @@ export const Navbar = () => {
           iconFilled={<PeopleAltIcon />}
           iconOutlined={<PeopleAltOutlinedIcon />}
         />
-        {logged && (
+        {userContext.logged && (
           <Item
             href="/Profile"
             label={'Profile'}
@@ -65,13 +65,13 @@ export const Navbar = () => {
           />
         )}
 
-        {logged && (
+        {userContext.logged && (
           <div className={styles.accountLine}>
             <Account />
           </div>
         )}
       </div>
-      {logged && (
+      {userContext.logged && (
         <div className={styles.accountBottom}>
           <Account />
         </div>

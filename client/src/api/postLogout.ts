@@ -1,17 +1,18 @@
-// redux
-import { useDispatch } from 'react-redux';
+// react
+import { UserContext } from '../App';
+import { useContext } from 'react';
 
 // hooks
 import { useToken } from '../hooks/useToken';
-import { userActions } from '../redux/userSlice';
 
 export const PostLogout = () => {
+  const userContext = useContext(UserContext);
   const { token, setToken } = useToken();
-  const dispatch = useDispatch();
 
   const postLogout = () => {
+    userContext.setLogged(false);
+    userContext.setUsername('');
     setToken({ token: '' });
-    dispatch(userActions.logout);
     window.location.reload();
   };
 

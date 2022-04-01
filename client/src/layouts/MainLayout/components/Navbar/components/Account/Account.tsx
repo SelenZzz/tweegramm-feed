@@ -1,14 +1,12 @@
 import styles from './Account.module.css';
 
 // react
+import { UserContext } from '../../../../../../App';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
 import { Avatar } from '../../../../../../components/Avatar/Avatar';
-
-// redux
-import { useSelector } from 'react-redux';
-import { selectUserUsername } from '../../../../../../redux/userSlice';
 
 // icons
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -17,7 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { PostLogout } from '../../../../../../api/postLogout';
 
 export const Account = () => {
-  const username = useSelector(selectUserUsername);
+  const userContext = useContext(UserContext);
 
   const { postLogout } = PostLogout();
 
@@ -33,7 +31,7 @@ export const Account = () => {
         <div onClick={handleInfoClick}>
           <Avatar />
         </div>
-        <div onClick={handleInfoClick}>{username}</div>
+        <div onClick={handleInfoClick}>{userContext.username}</div>
       </div>
       <div className={styles.logout} onClick={postLogout}>
         <LogoutIcon />

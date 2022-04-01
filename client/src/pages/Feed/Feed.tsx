@@ -1,7 +1,8 @@
 import styles from './Feed.module.css';
 
 // react
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../App';
 
 // hooks
 import { useTimeout } from '../../hooks/useTimeout';
@@ -15,15 +16,11 @@ import { Spinner } from '../../components/Spinner/Spinner';
 // utils
 import { GetFeed } from '../../api/getFeed';
 
-// redux
-import { selectLogged } from '../../redux/userSlice';
-import { useSelector } from 'react-redux';
-
 export const Feed = () => {
   const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 1000);
   const [error, setError] = useState<boolean>(false);
 
-  const logged = useSelector(selectLogged);
+  const userContext = useContext(UserContext);
 
   const { posts, getFeed } = GetFeed();
 
@@ -35,7 +32,7 @@ export const Feed = () => {
   return (
     <>
       <div>
-        {logged && <PostInput onSend={getFeed} />}
+        {userContext.logged && <PostInput onSend={getFeed} />}
         {posts.map((result) => {
           return <Post key={result.uuid} data={result} />;
         })}

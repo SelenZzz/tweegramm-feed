@@ -1,7 +1,8 @@
 import styles from './Profile.module.css';
 
 // react
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../App';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 // components
@@ -11,10 +12,6 @@ import { Post } from '../../components/Post/Post';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { NothingFound } from '../../components/NothingFound/NothingFound';
 
-// redux
-import { useSelector } from 'react-redux';
-import { selectUserUsername } from '../../redux/userSlice';
-
 // hooks
 import { useToken } from '../../hooks/useToken';
 import { useTimeout } from '../../hooks/useTimeout';
@@ -23,6 +20,7 @@ import { useTimeout } from '../../hooks/useTimeout';
 import { GetUserFeed } from '../../api/getUserFeed';
 
 export const Profile = () => {
+  const userContext = useContext(UserContext);
   const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 1000);
 
   const { token, setToken } = useToken();
@@ -31,14 +29,14 @@ export const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentUsername = useSelector(selectUserUsername);
   const pathname = location.pathname.split('/').pop();
-  const profileName = pathname!.toLowerCase() === 'profile' ? currentUsername : pathname;
+  const profileName =
+    pathname!.toLowerCase() === 'profile' ? userContext.username : pathname;
 
   const { posts, getUserFeed } = GetUserFeed();
 
   const currentUserPage =
-    currentUsername?.toLowerCase() === pathname?.toLowerCase() ||
+    userContext.username.toLowerCase() === pathname?.toLowerCase() ||
     pathname?.toLowerCase() === 'profile';
 
   useEffect(() => {

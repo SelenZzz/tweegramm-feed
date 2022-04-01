@@ -1,3 +1,7 @@
+// react
+import { UserContext } from '../App';
+import { useContext } from 'react';
+
 // utils
 import { url } from '../utils/config';
 
@@ -5,19 +9,20 @@ import { url } from '../utils/config';
 import { useToken } from '../hooks/useToken';
 import { useGetRequest } from '../hooks/useGetRequest';
 
-// redux
-import { userActions } from '../redux/userSlice';
-import { useDispatch } from 'react-redux';
-
 export const InitUser = () => {
+  const userContext = useContext(UserContext);
   const { token, setToken } = useToken();
-  const dispatch = useDispatch();
 
   const { getRequest } = useGetRequest(
     `${url}/init_user.php`,
-    (r) => dispatch(userActions.login({ username: r })),
+    (r) => {
+      userContext.setLogged(true);
+      userContext.setUsername(r);
+    },
     () => {
-      dispatch(userActions.logout());
+      userContext.setLogged(false);
+      userContext.setUsername('');
+
       setToken({ token: '' });
       window.location.reload();
     },
