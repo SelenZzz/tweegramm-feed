@@ -4,15 +4,19 @@ import cx from 'classnames';
 // react
 import { useEffect, useState } from 'react';
 
+// hooks
+import { useToken } from '../../hooks/useToken';
+
 // utils
 import { PostPost } from '../../api/postPost';
+import { iPost } from '../../utils/types';
 
 // components
 import TextareaAutosize from 'react-textarea-autosize';
 import { Avatar } from '../Avatar/Avatar';
-import { iPost } from '../../utils/types';
 
 export const PostInput = ({ onSend }: { onSend: any }) => {
+  const { token, setToken } = useToken();
   const [showPlaceholder, setPlaceholder] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [input, setInput] = useState<string>('');
@@ -22,7 +26,7 @@ export const PostInput = ({ onSend }: { onSend: any }) => {
   const handleInput = (value: string) => {
     if (value.length > 255) value = value.slice(0, 255);
     setInput(value);
-    setButtonDisabled(value.trim().length === 0);
+    if (token) setButtonDisabled(value.trim().length === 0);
     setPlaceholder(value === '');
   };
 

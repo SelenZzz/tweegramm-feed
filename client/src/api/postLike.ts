@@ -11,7 +11,7 @@ export const PostLike = (onResponse: (json: iPost) => void) => {
   const { postRequest } = usePostRequest(`${url}/send_like.php`, (r) => onResponse(r));
 
   const postLike = async (post_uuid: string) => {
-    postRequest({ token: token, post_uuid: post_uuid });
+    if (token) postRequest({ token: token, post_uuid: post_uuid });
   };
 
   return { postLike };
