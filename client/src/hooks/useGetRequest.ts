@@ -18,7 +18,7 @@ export const useGetRequest = (
         onResponse(responseJson);
       })
       .catch((e) => {
-        console.log('Error during GET request:', e);
+        console.log('Error during GET request:', paramUrl, e);
         if (onError) onError();
       });
   };

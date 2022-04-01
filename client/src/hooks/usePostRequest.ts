@@ -7,6 +7,9 @@ export const usePostRequest = (url: string, onResponse: (json: any) => void) => 
       .then((response) => response.json())
       .then((responseJson: any) => {
         onResponse(responseJson);
+      })
+      .catch((e) => {
+        console.log('Error during POST request:', url, body, e);
       });
   };
 
