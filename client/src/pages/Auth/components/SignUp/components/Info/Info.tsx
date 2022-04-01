@@ -1,78 +1,69 @@
 import styles from './Info.module.css';
 
+// react
+import { SignUpContext } from '../../SignUp';
+import { useContext } from 'react';
+
 // components
 import { Input } from '../../../../../../components/Input/Input';
+import { daysList, monthList, yearList } from '../dates';
 import { Selector } from '../../../../../../components/Selector/Selector';
 
-import { daysList, monthList, yearList } from '../dates';
-
 //utils
-
 import { monthNames } from '../../../../../../utils/months';
 
-export const Info = ({
-  username,
-  setUsername,
-  isUsernameValid,
-  email,
-  setEmail,
-  isEmailValid,
-  setDay,
-  month,
-  setMonth,
-  year,
-  setYear,
-}: {
-  username: string;
-  setUsername: (v: string) => void;
-  isUsernameValid: boolean;
-  email: string;
-  setEmail: (v: string) => void;
-  isEmailValid: boolean;
-  setDay: (v: number) => void;
-  month: number;
-  setMonth: (v: number) => void;
-  year: number;
-  setYear: (v: number) => void;
-}) => {
+export const Info = () => {
+  // prettier-ignore
+  const {username, setUsername, isUsernameValid, isUsernameExists, email, setEmail, isEmailValid, setDay, month, setMonth, year, setYear } = useContext(SignUpContext);
+
+  const alertText = () => {
+    switch (username) {
+      case !/^[a-zA-Z0-9]+$/.test(username) && username:
+        return 'username can consist only of english letters and numbers';
+
+      case username.length < 5 && username:
+        return 'username must be at least 5 symbols';
+
+      case isUsernameExists && username:
+        return 'username is already exists';
+
+      default:
+        return '';
+    }
+  };
+
   return (
     <>
       <Input
-        onChange={(v: string) => setUsername(v)}
+        onChange={(v: string) => setUsername && setUsername(v)}
         type="text"
         placeholder="username"
-        alert={username.length !== 0 && !isUsernameValid}
-        alertText={
-          username.match(/^[a-zA-Z]+$/)
-            ? 'username must be at least 5 symbols'
-            : 'username can consist only of english letters and numbers'
-        }
+        alertText={alertText()}
         maxLen={50}
       />
       <Input
-        onChange={(v: string) => setEmail(v)}
+        onChange={(v: string) => setEmail && setEmail(v)}
         type="email"
         placeholder="email"
-        alert={email.length !== 0 && !isEmailValid}
-        alertText={'email is not correct'}
+        alertText={!isEmailValid ? 'email is not correct' : ''}
         maxLen={100}
       />
       <div className={styles.birthdayHeader}>Date of birth</div>
       <div className={styles.birthday}>
         <Selector
-          onChange={(v: string) => setMonth(monthNames.indexOf(v) + 1)}
+          onChange={(v: string) => setMonth && setMonth(monthNames.indexOf(v) + 1)}
           list={monthList()}
           placeholder={'month'}
           grow={2}
         />
         <Selector
-          onChange={(v: string) => setDay(parseInt(v))}
+          onChange={(v: string) => setDay && setDay(parseInt(v))}
           list={daysList(month, year)}
           placeholder={'day'}
           grow={1}
         />
         <Selector
-          onChange={(v: string) => setYear(parseInt(v))}
+          onChange={(v: string) => setYear && setYear(parseInt(v))}
           list={yearList()}
           placeholder={'year'}
           grow={1}

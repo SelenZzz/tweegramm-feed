@@ -24,8 +24,7 @@ export const Login = () => {
 
   const [step, setStep] = useState<number>(0);
   // prettier-ignore
-  const { start: startTimer, clear: clearTimer  } = useTimeout(() => setError(true), 3000);
-  const [error, setError] = useState<boolean>(false);
+  const { start: startTimer, clear: clearTimer  } = useTimeout(() => setStep(step + 1), 3000);
 
   const { signUp, login } = GetAuth();
 
@@ -42,7 +41,6 @@ export const Login = () => {
       login(userInfo);
       clearTimer();
       startTimer();
-      setStep(step + 1);
     }
   }, [step]);
 
@@ -50,7 +48,7 @@ export const Login = () => {
     <div className={styles.container}>
       <div className={styles.header}>{headers[step]}</div>
       {step === 0 && Credentials({ setUsername, setPassword })}
-      {step >= 1 && Loading({ error })}
+      {step >= 1 && Loading({ error: step === 2 })}
       <BigButton
         label={buttonLabels[step]}
         active={isStepDone[step]}

@@ -8,14 +8,12 @@ export const Input = ({
   type,
   placeholder,
   maxLen,
-  alert,
   alertText,
 }: {
   onChange: Function;
   type: string;
   placeholder: string;
   maxLen: number;
-  alert?: boolean;
   alertText?: string;
 }) => {
   const [input, setInput] = useState<string>('');
@@ -31,7 +29,7 @@ export const Input = ({
 
   return (
     <div className={styles.container}>
-      <div className={cx(alert && styles.alert, styles.inputContainer)}>
+      <div className={cx(input && alertText && styles.alert, styles.inputContainer)}>
         <input
           className={styles.input}
           type={type}
@@ -45,7 +43,7 @@ export const Input = ({
           </div>
         </div>
       </div>
-      {alert && <div className={styles.alertText}>{alertText}</div>}
+      {input && alertText && <div className={styles.alertText}>{alertText}</div>}
     </div>
   );
 };

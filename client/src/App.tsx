@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // hooks
 import { useNetworkStatus } from './hooks/useNetworkStatus';
+import { useToken } from './hooks/useToken';
 
 // redux
 import { Provider } from 'react-redux';
@@ -18,7 +19,8 @@ import { Feed } from './pages/Feed/Feed';
 import { Profile } from './pages/Profile/Profile';
 import { LoginModal, SignUpModal } from './pages/Auth/Auth';
 import { Friends } from './pages/Friends/Friends';
-import { useToken } from './hooks/useToken';
+
+// api
 import { InitUser } from './api/getInitUser';
 
 const App = () => {
