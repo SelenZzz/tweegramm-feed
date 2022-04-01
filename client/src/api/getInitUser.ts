@@ -20,6 +20,10 @@ export const InitUser = () => {
   const { getRequest } = useGetRequest(
     `${url}/init_user.php`,
     (r) => {
+      if (r === '') {
+        postLogout();
+        return;
+      }
       userContext.setLogged(true);
       userContext.setUsername(r);
     },
