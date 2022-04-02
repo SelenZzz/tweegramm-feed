@@ -5,7 +5,6 @@ import { UserContext } from '../App';
 // hooks
 import { useToken } from './useToken';
 
-// prettier-ignore
 export const useGetRequest = (url: string, onResponse: (json: any) => void, onError?: () => void) => {
   const userContext = useContext(UserContext);
   const { token, setToken } = useToken();
@@ -28,7 +27,7 @@ export const useGetRequest = (url: string, onResponse: (json: any) => void, onEr
           window.location.reload();
           return;
         }
-        return response.json();
+        if (response.ok) return response.json();
       })
       .then((responseJson: any) => {
         onResponse(responseJson);
