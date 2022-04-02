@@ -1,6 +1,6 @@
 // react
-import { createContext, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { createContext, useEffect, useLayoutEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 // hooks
 import { useNetworkStatus } from './hooks/useNetworkStatus';
@@ -35,19 +35,27 @@ const defaultState: iUserContext = {
 
 export const UserContext = createContext<iUserContext>(defaultState);
 
-const AppWrapper = () => {
+const UserContextWrapper = () => {
   const [username, setUsername] = useState<string>('');
   const [logged, setLogged] = useState<boolean>(false);
-
+  // prettier-ignore
   return (
     <UserContext.Provider value={{ username, setUsername, logged, setLogged }}>
-      <App />
+      <App/>
     </UserContext.Provider>
   );
 };
 
+const LocationWrapper = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+  return <>{children}</>;
+};
+
 const App = () => {
-  const { token, setToken } = useToken();
+  const { token } = useToken();
   const { initUser } = InitUser();
   const { isOnline } = useNetworkStatus();
   console.log(isOnline ? 'Connection established' : 'No connection');
@@ -58,19 +66,21 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="Signup" element={<SignUpModal />} />
-        <Route path="Login" element={<LoginModal />} />
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Feed />} />
-          <Route path="Profile" element={<Profile />} />
-          <Route path="Friends" element={<Friends />} />
-          <Route path="Friends/*" element={<Profile />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
+      <LocationWrapper>
+        <Routes>
+          <Route path="Signup" element={<SignUpModal />} />
+          <Route path="Login" element={<LoginModal />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Feed />} />
+            <Route path="Profile" element={<Profile />} />
+            <Route path="Friends" element={<Friends />} />
+            <Route path="Friends/*" element={<Profile />} />
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </LocationWrapper>
     </BrowserRouter>
   );
 };
 
-export default AppWrapper;
+export default UserContextWrapper;
