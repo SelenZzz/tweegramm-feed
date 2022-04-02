@@ -26,6 +26,9 @@ import { Account } from './components/Account/Account';
 export const Navbar = () => {
   const userContext = useContext(UserContext);
 
+  const notificationsCounter = userContext.notifications > 9 ? '9+' : userContext.notifications.toString();
+  const notificationsLabel = 'Notifications' + (userContext.notifications > 0 ? ` (${notificationsCounter})` : '');
+
   return (
     <div className={styles.container}>
       <div className={styles.nav}>
@@ -35,7 +38,7 @@ export const Navbar = () => {
         <Item href="/" label={'Home'} iconFilled={<HomeIcon />} iconOutlined={<HomeOutlinedIcon />} />
         <Item href="/Explore" label={'Explore'} iconFilled={<TagIcon />} iconOutlined={<TagOutlinedIcon />} />
         {userContext.logged && (
-          <Item href="/Notifications" label={'Notifications'} iconFilled={<NotificationsIcon />} iconOutlined={<NotificationsNoneOutlinedIcon />} />
+          <Item href="/Notifications" label={notificationsLabel} iconFilled={<NotificationsIcon />} iconOutlined={<NotificationsNoneOutlinedIcon />} />
         )}
         <Item href="/Friends" label={'Friends'} iconFilled={<PeopleAltIcon />} iconOutlined={<PeopleAltOutlinedIcon />} />
         {userContext.logged && <Item href="/Profile" label={'Profile'} iconFilled={<AccountBoxIcon />} iconOutlined={<AccountBoxOutlinedIcon />} />}

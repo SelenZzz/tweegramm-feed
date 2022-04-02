@@ -23,3 +23,12 @@ export interface iNotification {
   text: string;
   username: string;
 }
+
+export interface iUserContext {
+  username: string;
+  setUsername: (v: string) => void;
+  logged: boolean;
+  setLogged: (v: boolean) => void;
+  notifications: number;
+  setNotifications: (v: number) => void;
+}

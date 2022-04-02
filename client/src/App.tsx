@@ -20,36 +20,39 @@ import { Notifications } from './pages/Notifications/Notifications';
 // api
 import { InitUser } from './api/getInitUser';
 
-interface iUserContext {
-  username: string;
-  setUsername: (v: string) => void;
-  logged: boolean;
-  setLogged: (v: boolean) => void;
-}
+// utils
+import { iUserContext } from './utils/types';
 
 const defaultState: iUserContext = {
   username: '',
   setUsername: () => {},
   logged: false,
   setLogged: () => {},
+  notifications: 0,
+  setNotifications: () => {},
 };
 
 export const UserContext = createContext<iUserContext>(defaultState);
 
 const UserContextWrapper = () => {
-  const [username, setUsername] = useState<string>('');
-  const [logged, setLogged] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>(defaultState.username);
+  const [logged, setLogged] = useState<boolean>(defaultState.logged);
+  const [notifications, setNotifications] = useState<number>(defaultState.notifications);
+
   // prettier-ignore
   return (
-    <UserContext.Provider value={{ username, setUsername, logged, setLogged }}>
+    <UserContext.Provider value={{ username, setUsername, logged, setLogged, notifications, setNotifications }}>
       <App/>
     </UserContext.Provider>
   );
 };
 
 const LocationWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { token } = useToken();
+  const { initUser } = InitUser();
   const location = useLocation();
   useLayoutEffect(() => {
+    if (token) initUser();
     document.documentElement.scrollTo(0, 0);
   }, [location.pathname]);
   return <>{children}</>;
@@ -58,8 +61,6 @@ const LocationWrapper = ({ children }: { children: React.ReactNode }) => {
 const App = () => {
   const { token } = useToken();
   const { initUser } = InitUser();
-  const { isOnline } = useNetworkStatus();
-  console.log(isOnline ? 'Connection established' : 'No connection');
 
   useEffect(() => {
     if (token) initUser();

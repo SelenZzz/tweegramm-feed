@@ -19,13 +19,14 @@ export const InitUser = () => {
 
   const { getRequest } = useGetRequest(
     `${url}/init_user.php`,
-    (r) => {
-      if (r === '') {
+    (r: { username: string; notifications: number }) => {
+      if (r.username === '') {
         postLogout();
         return;
       }
       userContext.setLogged(true);
-      userContext.setUsername(r);
+      userContext.setUsername(r.username);
+      userContext.setNotifications(r.notifications);
     },
     () => postLogout(),
   );

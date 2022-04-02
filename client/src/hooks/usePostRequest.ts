@@ -19,10 +19,11 @@ export const usePostRequest = (url: string, onResponse: (json: any) => void) => 
           userContext.setLogged(false);
           userContext.setUsername('');
           setToken({ token: '' });
+          userContext.setNotifications(0);
           window.location.reload();
           return;
         }
-        return response.json();
+        if (response.ok) return response.json();
       })
       .then((responseJson: any) => {
         onResponse(responseJson);

@@ -19,6 +19,7 @@ export const PostLogout = () => {
   const postLogout = async () => {
     userContext.setLogged(false);
     userContext.setUsername('');
+    userContext.setNotifications(0);
     setToken({ token: '' });
     postRequest({ token: token || '' });
   };

@@ -23,6 +23,7 @@ export const useGetRequest = (url: string, onResponse: (json: any) => void, onEr
         if (response.status === 401) {
           userContext.setLogged(false);
           userContext.setUsername('');
+          userContext.setNotifications(0);
           setToken({ token: '' });
           window.location.reload();
           return;
