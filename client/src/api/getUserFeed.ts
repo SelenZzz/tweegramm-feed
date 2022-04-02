@@ -12,7 +12,9 @@ import { useGetRequest } from '../hooks/useGetRequest';
 export const GetUserFeed = () => {
   const { token, setToken } = useToken();
   const [posts, setPosts] = useState<iPost[]>([]);
-  const { getRequest } = useGetRequest(`${url}/user_feed.php`, (r) => setPosts(r));
+  const { getRequest } = useGetRequest(`${url}/user_feed.php`, (r) => {
+    if (r) setPosts(r);
+  });
 
   const getUserFeed = async (username: string) => {
     getRequest({ token: token || '', username: username });

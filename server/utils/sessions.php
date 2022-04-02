@@ -42,6 +42,11 @@ function renew_token($token)
     if (!isset($token)) {
         die("token is not set");
     }
+    if (is_token_expired($token) === 1) {
+        http_response_code(401);
+        $username = '';
+        die(json_encode($username));
+    }
     $conn = require 'connection.php';
     $sth  = $conn->prepare('UPDATE sessions SET last_usage=NOW() WHERE token = ?');
     $sth->bind_param('s', $token);

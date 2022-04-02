@@ -12,7 +12,9 @@ import { useGetRequest } from '../hooks/useGetRequest';
 export const GetFriends = () => {
   const { token, setToken } = useToken();
   const [friends, setFriends] = useState<iUser[]>([]);
-  const { getRequest } = useGetRequest(`${url}/friends.php`, (r) => setFriends(r));
+  const { getRequest } = useGetRequest(`${url}/friends.php`, (r) => {
+    if (r) setFriends(r);
+  });
 
   useEffect(() => {
     getFriends();

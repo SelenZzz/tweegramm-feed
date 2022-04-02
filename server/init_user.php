@@ -7,10 +7,6 @@ require 'utils/sessions.php';
 $conn = require 'utils/connection.php';
 
 $token = $data["token"];
-if (is_token_expired($token) === 1) {
-    $username = '';
-    die(json_encode($username));
-}
 renew_token($token);
 expire_old_tokens($token);
 
