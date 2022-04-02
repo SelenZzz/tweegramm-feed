@@ -17,7 +17,7 @@ import { Spinner } from '../../components/Spinner/Spinner';
 import { GetFeed } from '../../api/getFeed';
 
 export const Feed = () => {
-  const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 1000);
+  const { set: startTimer } = useTimeout(() => setError(true), 1000);
   const [error, setError] = useState<boolean>(false);
 
   const userContext = useContext(UserContext);
@@ -25,7 +25,6 @@ export const Feed = () => {
   const { posts, getFeed } = GetFeed();
 
   useEffect(() => {
-    clearTimer();
     startTimer();
   }, []);
 

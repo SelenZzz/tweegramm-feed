@@ -24,7 +24,7 @@ export const Login = () => {
 
   const [step, setStep] = useState<number>(0);
   // prettier-ignore
-  const { start: startTimer, clear: clearTimer  } = useTimeout(() => setStep(step + 1), 3000);
+  const { set: startTimer  } = useTimeout(() => setStep(step + 1), 1000);
 
   const { signUp, login } = GetAuth();
 
@@ -39,7 +39,6 @@ export const Login = () => {
         password: password,
       };
       login(userInfo);
-      clearTimer();
       startTimer();
     }
   }, [step]);

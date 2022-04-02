@@ -4,7 +4,11 @@ export const useTimeout = (callback: Function, delay: number) => {
   const callbackRef = useRef(callback);
   const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const start = useCallback(() => {
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
+  const set = useCallback(() => {
     timeoutRef.current = setTimeout(() => callbackRef.current(), delay);
   }, [delay]);
 
@@ -16,5 +20,10 @@ export const useTimeout = (callback: Function, delay: number) => {
     return clear;
   }, [delay, clear]);
 
-  return { start, clear };
+  const reset = useCallback(() => {
+    clear();
+    set();
+  }, [clear, set]);
+
+  return { set, reset, clear };
 };

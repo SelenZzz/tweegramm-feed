@@ -21,7 +21,7 @@ import { GetUserFeed } from '../../api/getUserFeed';
 
 export const Profile = () => {
   const userContext = useContext(UserContext);
-  const { start: startTimer, clear: clearTimer } = useTimeout(() => setError(true), 1000);
+  const { set: startTimer } = useTimeout(() => setError(true), 1000);
 
   const { token, setToken } = useToken();
   const [error, setError] = useState<boolean>(false);
@@ -40,7 +40,6 @@ export const Profile = () => {
     pathname?.toLowerCase() === 'profile';
 
   useEffect(() => {
-    clearTimer();
     startTimer();
   }, []);
 
