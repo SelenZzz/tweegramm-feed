@@ -5,7 +5,7 @@ import { UserContext } from '../App';
 // hooks
 import { useToken } from './useToken';
 
-export const usePostRequest = (url: string, onResponse: (json: any) => void) => {
+export const usePostRequest = (url: string, onResponse: (json: any) => void, onError?: () => void) => {
   const userContext = useContext(UserContext);
   const { token, setToken } = useToken();
 
@@ -23,13 +23,14 @@ export const usePostRequest = (url: string, onResponse: (json: any) => void) => 
           window.location.reload();
           return;
         }
-        if (response.ok) return response.json();
+        return response.json();
       })
       .then((responseJson: any) => {
         onResponse(responseJson);
       })
       .catch((e) => {
-        console.log('Error during POST request:', url, 'body:', body, e);
+        // console.log('Error during POST request:', url, 'body:', body, e);
+        if (onError) onError();
       });
   };
 

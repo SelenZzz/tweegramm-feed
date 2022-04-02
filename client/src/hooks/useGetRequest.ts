@@ -7,7 +7,7 @@ import { useToken } from './useToken';
 
 export const useGetRequest = (url: string, onResponse: (json: any) => void, onError?: () => void) => {
   const userContext = useContext(UserContext);
-  const { token, setToken } = useToken();
+  const { setToken } = useToken();
 
   const toUrlParams = (urlStr: string, body: any) => {
     const url = new URL(urlStr);
@@ -28,13 +28,13 @@ export const useGetRequest = (url: string, onResponse: (json: any) => void, onEr
           window.location.reload();
           return;
         }
-        if (response.ok) return response.json();
+        return response.json();
       })
       .then((responseJson: any) => {
         onResponse(responseJson);
       })
       .catch((e) => {
-        console.log('Error during GET request:', paramUrl, e);
+        // console.log('Error during GET request:', paramUrl, e);
         if (onError) onError();
       });
   };
