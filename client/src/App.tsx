@@ -15,6 +15,7 @@ import { Feed } from './pages/Feed/Feed';
 import { Profile } from './pages/Profile/Profile';
 import { LoginModal, SignUpModal } from './pages/Auth/Auth';
 import { Friends } from './pages/Friends/Friends';
+import { Notifications } from './pages/Notifications/Notifications';
 
 // api
 import { InitUser } from './api/getInitUser';
@@ -73,6 +74,7 @@ const App = () => {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Feed />} />
             <Route path="Profile" element={<Profile />} />
+            <Route path="Notifications" element={<Notifications />} />
             <Route path="Friends" element={<Friends />} />
             <Route path="Friends/*" element={<Profile />} />
             <Route path="*" element={<NoPage />} />

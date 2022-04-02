@@ -32,38 +32,13 @@ export const Navbar = () => {
         <div className={styles.logo}>
           <Item label={'не скажу'} iconFilled={<Logo />} unhoverable={true} />
         </div>
-        <Item
-          href="/"
-          label={'Home'}
-          iconFilled={<HomeIcon />}
-          iconOutlined={<HomeOutlinedIcon />}
-        />
-        <Item
-          href="/Explore"
-          label={'Explore'}
-          iconFilled={<TagIcon />}
-          iconOutlined={<TagOutlinedIcon />}
-        />
-        <Item
-          href="/Notifications"
-          label={'Notifications'}
-          iconFilled={<NotificationsIcon />}
-          iconOutlined={<NotificationsNoneOutlinedIcon />}
-        />
-        <Item
-          href="/Friends"
-          label={'Friends'}
-          iconFilled={<PeopleAltIcon />}
-          iconOutlined={<PeopleAltOutlinedIcon />}
-        />
+        <Item href="/" label={'Home'} iconFilled={<HomeIcon />} iconOutlined={<HomeOutlinedIcon />} />
+        <Item href="/Explore" label={'Explore'} iconFilled={<TagIcon />} iconOutlined={<TagOutlinedIcon />} />
         {userContext.logged && (
-          <Item
-            href="/Profile"
-            label={'Profile'}
-            iconFilled={<AccountBoxIcon />}
-            iconOutlined={<AccountBoxOutlinedIcon />}
-          />
+          <Item href="/Notifications" label={'Notifications'} iconFilled={<NotificationsIcon />} iconOutlined={<NotificationsNoneOutlinedIcon />} />
         )}
+        <Item href="/Friends" label={'Friends'} iconFilled={<PeopleAltIcon />} iconOutlined={<PeopleAltOutlinedIcon />} />
+        {userContext.logged && <Item href="/Profile" label={'Profile'} iconFilled={<AccountBoxIcon />} iconOutlined={<AccountBoxOutlinedIcon />} />}
 
         {userContext.logged && (
           <div className={styles.accountLine}>

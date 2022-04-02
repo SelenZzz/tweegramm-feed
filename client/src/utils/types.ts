@@ -16,3 +16,10 @@ export interface iUser {
   birthday?: number;
   info?: string;
 }
+
+export interface iNotification {
+  uuid: string;
+  createdAt: number;
+  text: string;
+  username: string;
+}

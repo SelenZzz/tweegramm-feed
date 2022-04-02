@@ -1,0 +1,42 @@
+.container {
+  box-sizing: border-box;
+  padding: 10px 10px;
+  border-bottom: 1px solid #f1f3f4;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 20px;
+
+  transition: 500ms;
+}
+
+.container:hover {
+  background-color: #f1f3f4;
+  transition: 500ms;
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.content {
+  margin-bottom: 5px;
+  height: 100%;
+}
+
+.date {
+  font-weight: lighter;
+  font-size: 14px;
+}
