@@ -6,6 +6,7 @@ import { createContext, useEffect, useState } from 'react';
 // hooks
 import { useStateValidation } from '../../../../hooks/useStateValidation';
 import { useTimeout } from '../../../../hooks/useTimeout';
+import { useDebounce } from '../../../../hooks/useDebounce';
 
 // api
 import { GetAuth } from '../../../../api/getAuth';
@@ -108,9 +109,8 @@ export const SignUp = () => {
     }
   }, [step]);
 
-  useEffect(() => {
-    if (username) checkUsernameExists(username);
-  }, [username]);
+  // prettier-ignore
+  useDebounce(()=> { if (username) checkUsernameExists(username); }, 500, [username])
 
   return (
     // prettier-ignore
