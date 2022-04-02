@@ -15,7 +15,7 @@ import { Navbar } from './components/Navbar/Navbar';
 import { Tags } from './components/Tagbar/TagBar';
 
 export const MainLayout = () => {
-  const { token, setToken } = useToken();
+  const { token } = useToken();
 
   const [showSignUpModal, setSignUpModal] = useState(false);
   const [showLoginModal, setLoginModal] = useState(false);
@@ -26,12 +26,7 @@ export const MainLayout = () => {
     <>
       {showSignUpModal && <SignUpModal onCloseRequest={() => setSignUpModal(false)} />}
       {showLoginModal && <LoginModal onCloseRequest={() => setLoginModal(false)} />}
-      {(!token || token === '') && (
-        <SignUpAlert
-          onSignUpClick={() => setSignUpModal(true)}
-          onLoginClick={() => setLoginModal(true)}
-        />
-      )}
+      {(!token || token === '') && <SignUpAlert onSignUpClick={() => setSignUpModal(true)} onLoginClick={() => setLoginModal(true)} />}
       <div className={styles.container}>
         <Navbar />
         <div className={styles.outlet}>

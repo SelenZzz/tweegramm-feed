@@ -13,7 +13,7 @@ export const toLocalTime = (t: number) => {
     else if (delta < minute) fuzzy = delta + ' seconds ago';
     else if (delta < 2 * minute) fuzzy = 'a minute ago';
     else if (delta < hour) fuzzy = Math.floor(delta / minute) + ' minutes ago';
-    else if (Math.floor(delta / hour) == 1) fuzzy = '1 hour ago';
+    else if (Math.floor(delta / hour) === 1) fuzzy = '1 hour ago';
     else if (delta < day) fuzzy = Math.floor(delta / hour) + ' hours ago';
     else if (delta < day * 2) fuzzy = 'yesterday';
     return fuzzy;

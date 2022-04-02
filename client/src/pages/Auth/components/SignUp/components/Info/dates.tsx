@@ -1,4 +1,4 @@
-import { monthNames } from '../../../../../utils/months';
+import { monthNames } from '../../../../../../utils/months';
 
 export const daysList = (month: number, year: number) => {
   const days = new Date(year, month, 0).getDate();
@@ -30,7 +30,7 @@ export const yearList = () => {
 export const monthList = () => {
   const list = [];
   list.push(<option key="-1" value=" " disabled hidden></option>);
-  monthNames.map((e) => {
+  monthNames.forEach((e) => {
     list.push(
       <option key={e} value={e}>
         {e}

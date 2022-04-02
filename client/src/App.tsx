@@ -62,7 +62,7 @@ const App = () => {
 
   useEffect(() => {
     if (token) initUser();
-  }, [token]);
+  }, []);
 
   return (
     <BrowserRouter>

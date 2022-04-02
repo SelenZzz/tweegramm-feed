@@ -13,7 +13,6 @@ import { Spinner } from '../../components/Spinner/Spinner';
 import { NothingFound } from '../../components/NothingFound/NothingFound';
 
 // hooks
-import { useToken } from '../../hooks/useToken';
 import { useTimeout } from '../../hooks/useTimeout';
 
 // utils
@@ -21,34 +20,26 @@ import { GetUserFeed } from '../../api/getUserFeed';
 
 export const Profile = () => {
   const userContext = useContext(UserContext);
-  const { set: startTimer } = useTimeout(() => setError(true), 1000);
 
-  const { token, setToken } = useToken();
+  const { set: startTimer } = useTimeout(() => setError(true), 1000);
   const [error, setError] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const pathname = location.pathname.split('/').pop();
-  const profileName =
-    pathname!.toLowerCase() === 'profile' ? userContext.username : pathname;
-
   const { posts, getUserFeed } = GetUserFeed();
 
-  const currentUserPage =
-    userContext.username.toLowerCase() === pathname?.toLowerCase() ||
-    pathname?.toLowerCase() === 'profile';
+  const pathname = location.pathname.split('/').pop();
+  const profileName = pathname!.toLowerCase() === 'profile' ? userContext.username : pathname;
+  const currentUserPage = userContext.username.toLowerCase() === pathname?.toLowerCase() || pathname?.toLowerCase() === 'profile';
 
   useEffect(() => {
     startTimer();
   }, []);
 
   useEffect(() => {
-    if (pathname!.toLowerCase() === 'profile' && token === '') navigate('/');
-  }, [pathname]);
-
-  useEffect(() => {
     if (profileName) getUserFeed(profileName);
+    else navigate('/');
   }, [profileName]);
 
   return (

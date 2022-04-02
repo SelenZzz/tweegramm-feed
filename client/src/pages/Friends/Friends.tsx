@@ -17,7 +17,7 @@ import { NothingFound } from '../../components/NothingFound/NothingFound';
 export const Friends = () => {
   const { set: startTimer } = useTimeout(() => setError(true), 1000);
   const [error, setError] = useState<boolean>(false);
-  const { friends, getFriends } = GetFriends();
+  const { friends } = GetFriends();
 
   useEffect(() => {
     startTimer();

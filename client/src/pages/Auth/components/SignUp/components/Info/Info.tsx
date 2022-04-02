@@ -6,7 +6,7 @@ import { useContext } from 'react';
 
 // components
 import { Input } from '../../../../../../components/Input/Input';
-import { daysList, monthList, yearList } from '../dates';
+import { daysList, monthList, yearList } from './dates';
 import { Selector } from '../../../../../../components/Selector/Selector';
 
 //utils
@@ -14,7 +14,7 @@ import { monthNames } from '../../../../../../utils/months';
 
 export const Info = () => {
   // prettier-ignore
-  const {username, setUsername, isUsernameValid, isUsernameExists, email, setEmail, isEmailValid, setDay, month, setMonth, year, setYear } = useContext(SignUpContext);
+  const {username, setUsername, isUsernameExists, setEmail, isEmailValid, setDay, month, setMonth, year, setYear } = useContext(SignUpContext);
 
   const alertText = () => {
     switch (username) {
@@ -34,13 +34,7 @@ export const Info = () => {
 
   return (
     <>
-      <Input
-        onChange={(v: string) => setUsername && setUsername(v)}
-        type="text"
-        placeholder="username"
-        alertText={alertText()}
-        maxLen={50}
-      />
+      <Input onChange={(v: string) => setUsername && setUsername(v)} type="text" placeholder="username" alertText={alertText()} maxLen={50} />
       <Input
         onChange={(v: string) => setEmail && setEmail(v)}
         type="email"
@@ -50,24 +44,9 @@ export const Info = () => {
       />
       <div className={styles.birthdayHeader}>Date of birth</div>
       <div className={styles.birthday}>
-        <Selector
-          onChange={(v: string) => setMonth && setMonth(monthNames.indexOf(v) + 1)}
-          list={monthList()}
-          placeholder={'month'}
-          grow={2}
-        />
-        <Selector
-          onChange={(v: string) => setDay && setDay(parseInt(v))}
-          list={daysList(month, year)}
-          placeholder={'day'}
-          grow={1}
-        />
-        <Selector
-          onChange={(v: string) => setYear && setYear(parseInt(v))}
-          list={yearList()}
-          placeholder={'year'}
-          grow={1}
-        />
+        <Selector onChange={(v: string) => setMonth && setMonth(monthNames.indexOf(v) + 1)} list={monthList()} placeholder={'month'} grow={2} />
+        <Selector onChange={(v: string) => setDay && setDay(parseInt(v))} list={daysList(month, year)} placeholder={'day'} grow={1} />
+        <Selector onChange={(v: string) => setYear && setYear(parseInt(v))} list={yearList()} placeholder={'year'} grow={1} />
       </div>
     </>
   );
