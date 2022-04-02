@@ -37,9 +37,6 @@ export const MainLayout = () => {
         </div>
         <Tags />
       </div>
-      <footer>
-        <p>:)</p>
-      </footer>
     </>
   );
 };

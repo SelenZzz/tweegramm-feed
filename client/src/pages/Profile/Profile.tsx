@@ -7,18 +7,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // components
 import { PostInput } from '../../components/PostInput/PostInput';
-import { User } from './components/User';
+import { User } from './components/User/User';
 import { Post } from '../../components/Post/Post';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { NothingFound } from '../../components/NothingFound/NothingFound';
 
 // hooks
 import { useTimeout } from '../../hooks/useTimeout';
+import { useToken } from '../../hooks/useToken';
 
-// utils
+// api
 import { GetUserFeed } from '../../api/getUserFeed';
+import { GetUserBio } from '../../api/getUserBio';
 
 export const Profile = () => {
+  const { token } = useToken();
   const userContext = useContext(UserContext);
 
   const { set: startTimer } = useTimeout(() => setError(true), 1000);
@@ -28,6 +31,7 @@ export const Profile = () => {
   const location = useLocation();
 
   const { posts, getUserFeed } = GetUserFeed();
+  const { bio, getUserBio } = GetUserBio();
 
   const pathname = location.pathname.split('/').pop();
   const profileName = pathname!.toLowerCase() === 'profile' ? userContext.username : pathname;
@@ -38,13 +42,15 @@ export const Profile = () => {
   }, []);
 
   useEffect(() => {
-    if (profileName) getUserFeed(profileName);
-    else navigate('/');
+    if (profileName) {
+      getUserFeed(profileName);
+      getUserBio(profileName);
+    } else if (!token) navigate('/');
   }, [profileName]);
 
   return (
     <>
-      <User username={profileName!} />
+      <User username={profileName!} editable={currentUserPage} bio={bio} />
       <div className={styles.feed}>
         {currentUserPage && <PostInput onSend={() => getUserFeed(profileName!)} />}
         {posts.map((result) => {

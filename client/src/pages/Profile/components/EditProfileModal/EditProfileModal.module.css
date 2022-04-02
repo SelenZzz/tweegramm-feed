@@ -1,14 +1,11 @@
-.post {
-  padding: 10px 7px 5px 10px;
+.header {
+  color: var(--black);
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 28px;
   display: flex;
-  flex-flow: row;
-  border-bottom: 1px solid var(--lighter);
-}
-
-.form {
-  word-break: break-word;
-  padding-left: 10px;
-  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .textContainer {
