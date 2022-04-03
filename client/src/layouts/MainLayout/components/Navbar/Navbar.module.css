@@ -28,7 +28,7 @@
   display: inline;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 800px) {
   .logo {
     display: none;
   }
@@ -37,6 +37,8 @@
     margin: 0px;
     padding: 0px;
     top: 0px;
+    width: 100%;
+    align-items: center;
   }
   .nav {
     flex-direction: row;

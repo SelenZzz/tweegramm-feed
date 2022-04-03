@@ -11,18 +11,6 @@
   width: 220px;
 }
 
-@media (max-width: 850px) {
-  .container {
-    margin-bottom: 0px;
-  }
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding: 10px 7px;
-  }
-}
-
 .hoverable:hover {
   background-color: var(--lighter);
 }
@@ -37,8 +25,23 @@
   width: 24px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .label {
     display: none;
+  }
+  .container {
+    width: min-content;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 10px 7px;
   }
 }

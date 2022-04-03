@@ -14,7 +14,7 @@
   top: -30%;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1150px) {
   .container {
     display: none;
   }
