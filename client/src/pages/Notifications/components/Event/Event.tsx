@@ -16,7 +16,9 @@ export const Event = ({ username, createdAt, text }: { username: string; created
       <Avatar onClick={() => navigate(`/Friends/${username}`)} />
       <div className={styles.form}>
         <div className={styles.content}>
-          <b className={styles.link}>{username}</b>
+          <b className={styles.link} onClick={() => navigate(`/Friends/${username}`)}>
+            {username}
+          </b>
           {' liked  your post '}
           <b>{postContent}</b>
         </div>
