@@ -2,10 +2,9 @@
 
 # MariaDB
 mariadb_data/*
-!mariadb_data/tweegramm
+!mariadb_data/init.sql
 
 # dependencies
-vendor
 node_modules
 .pnp
 .pnp.js
