@@ -1,6 +1,4 @@
 .container {
-  /* background-image: url('./bg.jpg'); */
-  /* height: 150px; */
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
@@ -30,8 +28,34 @@
 }
 
 .bio {
-  font-weight: lighter;
+  margin-top: 15px;
+  font-size: 15px;
   -webkit-flow-into: 12px;
+}
+
+.dates {
+  margin-top: 5px;
+  margin-left: -3px;
+  margin-right: 8px;
+  color: var(--grey-hover);
+  font-weight: 500;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dates > div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 3px;
+}
+
+@media (max-width: 400px) {
+  .dates {
+    flex-direction: column;
+  }
 }
 
 .buttonContainer {

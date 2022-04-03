@@ -8,18 +8,15 @@ import { iUser } from '../utils/types';
 //hooks
 import { useToken } from '../hooks/useToken';
 import { useGetRequest } from '../hooks/useGetRequest';
+import { usePostRequest } from '../hooks/usePostRequest';
 
 export const GetAuth = () => {
   const navigate = useNavigate();
   const { token, setToken } = useToken();
   const userAgent = navigator.userAgent.slice(0, 128);
 
-  const { getRequest: loginRequest } = useGetRequest(`${url}/login.php`, (r) =>
-    onResponse(r),
-  );
-  const { getRequest: signUpRequest } = useGetRequest(`${url}/signup.php`, (r) =>
-    onResponse(r),
-  );
+  const { getRequest: loginRequest } = useGetRequest(`${url}/login.php`, (r) => onResponse(r));
+  const { postRequest: signUpRequest } = usePostRequest(`${url}/signup.php`, (r) => onResponse(r));
 
   const login = async (user: iUser) => {
     const { username, password } = user;

@@ -5,7 +5,23 @@ import { Avatar } from '../../../../components/Avatar/Avatar';
 import { useState } from 'react';
 import { EditProfileModal } from '../EditProfileModal/EditProfileModal';
 
-export const User = ({ username, bio, editable }: { username: string; bio: string; editable?: boolean }) => {
+// icons
+import CakeIcon from '@mui/icons-material/Cake';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
+export const User = ({
+  username,
+  bio,
+  birthday,
+  joined,
+  editable,
+}: {
+  username: string;
+  bio: string;
+  editable?: boolean;
+  birthday: string;
+  joined: string;
+}) => {
   const [showEditProfileModal, setEditProfileModal] = useState<boolean>(false);
 
   return (
@@ -23,6 +39,16 @@ export const User = ({ username, bio, editable }: { username: string; bio: strin
           )}
           <div className={styles.username}>{username}</div>
           <div className={styles.bio}>{bio}</div>
+          <div className={styles.dates}>
+            <div>
+              <CakeIcon />
+              Born {birthday}
+            </div>
+            <div>
+              <CalendarMonthIcon />
+              Joined {joined}
+            </div>
+          </div>
         </div>
       </div>
     </>

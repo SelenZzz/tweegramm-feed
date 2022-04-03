@@ -86,12 +86,7 @@ export const SignUp = () => {
   const headers = ['Create your account', 'Setup a password', 'Almost done...','Something went wrong'];
   const buttonLabels = ['Next', 'Finish', 'Wait a little bit', ':c'];
   const isStepDone = [
-    isUsernameValid &&
-      !isUsernameExists &&
-      isEmailValid &&
-      isDayValid &&
-      isMonthValid &&
-      isYearValid,
+    isUsernameValid && !isUsernameExists && isEmailValid && isDayValid && isMonthValid && isYearValid,
     isPassword1Valid && isPassword2Valid,
     false,
   ];
@@ -101,7 +96,7 @@ export const SignUp = () => {
       const userInfo: iUser = {
         username: username,
         email: email,
-        birthday: Math.floor(new Date(year, month, day).getTime() / 1000),
+        birthday: `${year}-${month}-${day}`,
         password: password1,
       };
       signUp(userInfo);

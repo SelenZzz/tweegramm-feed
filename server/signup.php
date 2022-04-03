@@ -1,6 +1,6 @@
 <?php
 require 'utils/parse_parameters.php';
-$data = check_get_parameters("username", "password", "email", "userAgent");
+$data = check_post_parameters("username", "password", "email", "birthday", "userAgent");
 
 require 'utils/cors.php';
 $conn = require 'utils/connection.php';
@@ -9,9 +9,10 @@ $username = $data['username'];
 $password = md5($configs['salt'].$data['password']);
 $email    = $data['email'];
 $agent    = $data['userAgent'];
+$birthday = $data['birthday'];
 
-$sth = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?,?,?)");
-$sth->bind_param('sss', $username, $password, $email);
+$sth = $conn->prepare("INSERT INTO users (username, password, email, birthday) VALUES (?,?,?,?)");
+$sth->bind_param('ssss', $username, $password, $email, $birthday);
 $result = $sth->execute();
 
 $sth = $conn->prepare("SELECT uuid FROM users WHERE username = ?");

@@ -18,7 +18,7 @@ import { useToken } from '../../hooks/useToken';
 
 // api
 import { GetUserFeed } from '../../api/getUserFeed';
-import { GetUserBio } from '../../api/getUserBio';
+import { GetUserBio } from '../../api/getUserInfo';
 
 export const Profile = () => {
   const { token } = useToken();
@@ -31,7 +31,7 @@ export const Profile = () => {
   const location = useLocation();
 
   const { posts, getUserFeed } = GetUserFeed();
-  const { bio, getUserBio } = GetUserBio();
+  const { bio, birthday, joined, getUserInfo } = GetUserBio();
 
   const pathname = location.pathname.split('/').pop();
   const profileName = pathname!.toLowerCase() === 'profile' ? userContext.username : pathname;
@@ -44,13 +44,13 @@ export const Profile = () => {
   useEffect(() => {
     if (profileName) {
       getUserFeed(profileName);
-      getUserBio(profileName);
+      getUserInfo(profileName);
     } else if (!token) navigate('/');
   }, [profileName]);
 
   return (
     <>
-      <User username={profileName!} editable={currentUserPage} bio={bio} />
+      <User username={profileName!} editable={currentUserPage} bio={bio} birthday={birthday} joined={joined} />
       <div className={styles.feed}>
         {currentUserPage && <PostInput onSend={() => getUserFeed(profileName!)} />}
         {posts.map((result) => {

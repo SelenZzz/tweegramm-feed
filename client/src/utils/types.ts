@@ -13,7 +13,7 @@ export interface iUser {
   username: string;
   password: string;
   email?: string;
-  birthday?: number;
+  birthday?: string;
   info?: string;
 }
 
