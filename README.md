@@ -14,6 +14,8 @@
 
 - в `./client/src/utils/config.ts` изменить значения констант <b>`CLIENT_API_URL_PUBLIC`<b> и <b>`CLIENT_API_URL_LOCAL`<b>
 - в корневой папке репозитория `docker-compose up`
+- загрузить таблицы в бд - `localhost:40001/utils/init_db.php`
+- теперь можно зайти в клиент - `localhost:40000`
 
 ## Функциональность
 
